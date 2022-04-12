@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
 import {HeaderComponent} from './header/header.component';
 import { UrgenciasComponent } from './urgencias/urgencias.component';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FormComponent } from './urgencias/form.component';
 import { FormsModule } from '@angular/forms';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
@@ -18,8 +18,8 @@ import {TokenInterceptor} from './usuarios/interceptors/token.interceptor';
 import { UrgenciasService } from './urgencias/urgencias.service';
 import { AuthInterceptor } from './usuarios/interceptors/auth.interceptor';
 import { FilterPipe } from './filter.pipe';
-import { ChartsModule } from 'ng2-charts';
-import { AreaComponent } from './areas/area/area.component';
+import {HttpClientModule} from '@angular/common/http';
+import { AreaComponent } from './areas/area.component';
 
 
 
@@ -42,16 +42,12 @@ const routes:Routes =[
     FormComponent,
     LoginComponent,
     FilterPipe,
-    AreaComponent,
-
-
-
+    AreaComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ChartsModule,
     RouterModule.forRoot(routes),
     [NgxMaterialTimepickerModule],
      BrowserAnimationsModule,
