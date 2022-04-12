@@ -107,7 +107,7 @@ public class AreaControlller {
 			
 		}
 		response.put("mensaje", "El area ha sido creado con exito");
-		response.put("urgencia", areanew);
+		response.put("area", areanew);
 			
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
 
@@ -115,7 +115,7 @@ public class AreaControlller {
 
 
     @Secured({"ROLE_ADMIN"})
-	@PutMapping("/urgencias/{id}")
+	@PutMapping("/areas/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Area area,BindingResult result, @PathVariable Long id) {
 		
 		Area datoactual = areaservice.findbyid(id);

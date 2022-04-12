@@ -27,6 +27,7 @@ import { AreaComponent } from './areas/area.component';
 const routes:Routes =[
   {path:'',redirectTo:'/urgencias',pathMatch:'full'},
   {path:'urgencias',component:UrgenciasComponent},
+  {path:'areas',component:AreaComponent},
   {path:'urgencias/form',component:FormComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'urgencias/form/:id',component:FormComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'login',component:LoginComponent},

@@ -14,6 +14,8 @@ export class AreaComponent implements OnInit {
     public authservice: AuthService,private http:HttpClient) { }
 
     public areas:Area[];
+    filterpost = ''
+
 
   ngOnInit(): void {
     this.areaservice.getAreas().subscribe(

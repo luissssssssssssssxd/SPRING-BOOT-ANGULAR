@@ -24,7 +24,7 @@
 
       </div>
       <div class="table-responsive">
-        <div  *ngIf="urgencias?.length == 0" class="alert alert-info">
+        <div  *ngIf="areas?.length == 0" class="alert alert-info">
           No hay registros en la base de datos
         </div>
         <input
@@ -34,7 +34,7 @@
         [(ngModel)]="filterpost"
         name="filterpost"
       />
-        <table class="table" *ngIf="urgencias?.length>0">
+        <table class="table" *ngIf="areas?.length>0">
           <thead>
             <tr>
 
