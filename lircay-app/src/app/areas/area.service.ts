@@ -52,7 +52,7 @@ export class AreaService {
 
   }
 
-//Update ficha urgencia
+//Update area
   update(area:Area):Observable<any>{
     return this.http.put<any>(`${this.urlEndPoint}/${area.id}`,area).pipe(
       catchError(e => {
@@ -69,7 +69,7 @@ export class AreaService {
     )
   }
 
-  //Elimina una ficha urgencias
+  //Elimina una area
   delete(id:any):Observable<Area>{
     return this.http.delete<Area>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e => {

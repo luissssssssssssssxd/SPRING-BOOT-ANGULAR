@@ -20,6 +20,7 @@ import { AuthInterceptor } from './usuarios/interceptors/auth.interceptor';
 import { FilterPipe } from './filter.pipe';
 import {HttpClientModule} from '@angular/common/http';
 import { AreaComponent } from './areas/area.component';
+import { FormareaComponent } from './areas/formarea.component';
 
 
 
@@ -31,6 +32,9 @@ const routes:Routes =[
   {path:'urgencias/form',component:FormComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'urgencias/form/:id',component:FormComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'login',component:LoginComponent},
+  {path:'areas/form',component:FormareaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
+  {path:'areas/form/:id',component:FormareaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
+
 
 ];
 
@@ -43,7 +47,8 @@ const routes:Routes =[
     FormComponent,
     LoginComponent,
     FilterPipe,
-    AreaComponent
+    AreaComponent,
+    FormareaComponent
   ],
   imports: [
     BrowserModule,

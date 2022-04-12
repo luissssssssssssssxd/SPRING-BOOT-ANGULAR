@@ -17,7 +17,7 @@
     <div class="col-12">
       <div class="my-2 text-left">
 
-        <button *ngIf="authservice.hasRole('ROLE_USER')"    class="btn btn-rounded btn-primary" type="button" [routerLink]="['/urgencias/form']">
+        <button *ngIf="authservice.hasRole('ROLE_USER')"    class="btn btn-rounded btn-primary" type="button" [routerLink]="['/areas/form']">
           Crear Registro
         </button>
           <button *ngIf="authservice.hasRole('ROLE_ADMIN')"  class="btn btn-rounded btn-info float-right" type="button" name="button" (click)='export()' >EXCEL</button>
@@ -40,11 +40,7 @@
 
 
               <th>id</th>
-              <th>Paciente</th>
-              <th>Acompañante</th>
-              <th>Fecha Ingreso</th>
-              <th>Observacion</th>
-              <th>Tiempo Espera</th>
+              <th>Area</th>
               <th  *ngIf="authservice.hasRole('ROLE_ADMIN')">
                 Editar
               </th>
@@ -55,19 +51,15 @@
           </thead>
           <tbody>
 
-            <tr *ngFor="let urgencia of urgencias | filter: filterpost">
-              <td>{{ urgencia.id }}</td>
-              <td>{{ urgencia.nombrepaciente }}</td>
-              <td>{{ urgencia.nombreacompanante }}</td>
-              <td>{{urgencia.fechaingreso }}</td>
-              <td>{{ urgencia.observacion }}</td>
-              <td>{{ urgencia.horaespera }}</td>
+            <tr *ngFor="let area of areas | filter: filterpost">
+              <td>{{ area.id }}</td>
+              <td>{{ area.nombrearea }}</td>
               <td  *ngIf="authservice.hasRole('ROLE_ADMIN')">
-                <button class="btn" [routerLink]="['/urgencias/form',urgencia.id]"><i class="fa fa-edit"></i></button>
+                <button class="btn" [routerLink]="['/areas/form',area.id]"><i class="fa fa-edit"></i></button>
               </td>
 
               <td *ngIf="authservice.hasRole('ROLE_ADMIN')">
-                <button class="btn" name="eliminar" (click)='delete(urgencia)'><i class="fa fa-trash"></i></button>
+                <button class="btn" name="eliminar" (click)='delete(area)'><i class="fa fa-trash"></i></button>
               </td>
 
             </tr>
