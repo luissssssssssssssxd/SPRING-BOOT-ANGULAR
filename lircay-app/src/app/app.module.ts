@@ -19,6 +19,7 @@ import { UrgenciasService } from './urgencias/urgencias.service';
 import { AuthInterceptor } from './usuarios/interceptors/auth.interceptor';
 import { FilterPipe } from './filter.pipe';
 import { ChartsModule } from 'ng2-charts';
+import { AreaComponent } from './areas/area/area.component';
 
 
 
@@ -41,6 +42,7 @@ const routes:Routes =[
     FormComponent,
     LoginComponent,
     FilterPipe,
+    AreaComponent,
 
 
 
