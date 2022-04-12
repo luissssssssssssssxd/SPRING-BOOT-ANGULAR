@@ -1,0 +1,70 @@
+<ul class="alert alert-danger" *ngIf="errores?.length>0">
+  <li *ngFor="let err of errores">
+  {{err}}
+</li>
+</ul>
+
+
+<div class="card bg-dark text-white">
+  <div class="card-header">{{titulo}}</div>
+  <div class="card-body">
+
+
+<form #urgenciasForm="ngForm" >
+  <div class="form-group row">
+    <label for="" class="col-form-label col-sm-2">Nombre Paciente</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" [(ngModel)]="urgencia.nombrepaciente" name="nombrepaciente"  #nombrepaciente="ngModel" >
+  <div class="alert alert-danger" *ngIf="nombrepaciente.invalid && (nombrepaciente.dirty || nombrepaciente.touched) ">
+    <div *ngIf="nombrepaciente.errors.required">
+      Nombre es requerido
+
+    </div>
+  </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="" class="col-form-label col-sm-2">Nombre Acompañante</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" [(ngModel)]="urgencia.nombreacompanante" name="nombreacompanante" >
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="" class="col-form-label col-sm-2">Observacion</label>
+    <div class="col-sm-6">
+      <textarea type="text" class="form-control" [(ngModel)]="urgencia.observacion" name="observacion" ></textarea>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="" class="col-form-label col-sm-2">Tiempo de Espera</label>
+    <div class="col-sm-6">
+      <input class="form-control" placeholder="24hr formato" aria-label="24hr format" [ngxTimepicker]="fullTime" [format]="24"  readonly  [(ngModel)]="urgencia.horaespera" name="horaespera">
+      <ngx-material-timepicker #fullTime></ngx-material-timepicker>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-6">
+      <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!urgencia.id else elseBlock" [disabled]="!urgenciasForm.form.valid">Crear</button>
+  <ng-template #elseBlock>
+    <button class="btn btn-primary" role="button" (click)='update()'  [disabled]="!urgenciasForm.form.valid">Editar</button>
+
+  </ng-template>
+  <button class="btn btn-warning float-right" role="button" [routerLink]="['/urgencias/']"  >Volver</button>
+
+
+
+    </div>
+  </div>
+
+</form>
+
+
+
+
+  </div>
+
+</div>
