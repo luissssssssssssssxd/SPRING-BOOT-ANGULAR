@@ -33,7 +33,7 @@ catchError(e => {
   }
 
   if(e.status==403){
-    swal('Acceso denegado',`Hola ${this.authservice.usuario.username} no tienes acceso a este recurso`,'warning');
+  /*   swal('Acceso denegado',`Hola ${this.authservice.usuario.username} no tienes acceso a este recurso`,'warning'); */
     this.router.navigate(['/urgencias']);
   }
   return throwError(e);

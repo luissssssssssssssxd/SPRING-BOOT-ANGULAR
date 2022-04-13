@@ -26,7 +26,7 @@ export class RoleGuard implements CanActivate {
       if(this.authservice.hasRole(role)){
         return true;
       }
-      swal('Acceso denegado',`Hola ${this.authservice.usuario.username} no tienes acceso a este recurso`,'warning');
+      /* swal('Acceso denegado',`Hola ${this.authservice.usuario.username} no tienes acceso a este recurso`,'warning'); */
       this.router.navigate(['/urgencias']);
     return false;
   }

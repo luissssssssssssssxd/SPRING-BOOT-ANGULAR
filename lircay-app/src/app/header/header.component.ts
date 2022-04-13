@@ -16,7 +16,7 @@ export class HeaderComponent{
 
   }
   logout():void{
-    swal('Login',`Hola ${this.authservice.usuario.username} ha cerrado sesion exitosamente`,'success');
+   /*  swal('Login',`Hola ${this.authservice.usuario.username} ha cerrado sesion exitosamente`,'success'); */
     this.authservice.logout();
     this.router.navigate(['/login']);
 

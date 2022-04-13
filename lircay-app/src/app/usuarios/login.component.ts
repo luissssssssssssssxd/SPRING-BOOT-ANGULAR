@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from './usuario';
 import swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 import {AuthService} from './auth.service';
 import {Router} from  '@angular/router';
@@ -22,8 +23,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.autoService.isAuthenticated()){
-      swal('Login',`Hola ${this.autoService.usuario.username} ya estas autenticado`,'info');
-      this.router.navigate(['/urgencias']);
+/*       swal('Login',`Hola ${this.autoService.usuario.username} ya estas autenticado`,'info');
+ */      this.router.navigate(['/urgencias']);
     }
   }
 
@@ -31,8 +32,9 @@ export class LoginComponent implements OnInit {
     console.log(this.usuario);
 
     if(this.usuario.username == null || this.usuario.password == null){
-      swal('Error Login','Usuario o Contraseña vacias!','error')
-      return;
+      Swal.fire({ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, title: 'Error Login', text: 'Usuario o contraseña vacias¡', icon: 'error', });
+/*       swal('Error Login','Usuario o Contraseña vacias!','error')
+ */      return;
     }
 
     this.autoService.login(this.usuario).subscribe(respuesta => {
@@ -43,11 +45,11 @@ export class LoginComponent implements OnInit {
 
 
       this.router.navigate(['/urgencias']);
-      swal('Login',`Hola ${usuario},has iniciado sesion con exito!`,'success')
-    },err =>{
+/*       swal('Login',`Hola ${usuario},has iniciado sesion con exito!`,'success')
+ */    },err =>{
       if(err.status == 400){
-        swal('Error Login','Usuario o Contraseña incorrecta!','error')
-
+/*         swal('Error Login','Usuario o Contraseña incorrecta!','error')
+ */
       }
     }
 

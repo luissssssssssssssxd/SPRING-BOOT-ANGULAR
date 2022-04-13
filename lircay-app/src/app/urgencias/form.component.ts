@@ -40,7 +40,7 @@ export class FormComponent implements OnInit {
   this.urgenciaservice.create(this.urgencia)
   .subscribe(json =>{
     this.router.navigate(['/urgencias'])
-    swal('Nuevo Registro',`Registro ${json.urgencia.nombrepaciente} creado con exito!`,'success');
+   /*  swal('Nuevo Registro',`Registro ${json.urgencia.nombrepaciente} creado con exito!`,'success'); */
 
   },
   err=> {
@@ -56,7 +56,7 @@ export class FormComponent implements OnInit {
     this.urgenciaservice.update(this.urgencia)
     .subscribe(json =>{
       this.router.navigate(['/urgencias'])
-      swal('Registro Actualizado',`Registro ${json.urgencia.nombrepaciente} actualizado con exito`,'success')
+      /* swal('Registro Actualizado',`Registro ${json.urgencia.nombrepaciente} actualizado con exito`,'success') */
     },
     err=> {
       this.errores = err.error.errors as string [];

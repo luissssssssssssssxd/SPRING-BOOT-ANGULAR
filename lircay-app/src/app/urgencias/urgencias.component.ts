@@ -68,7 +68,7 @@ export class UrgenciasComponent implements OnInit {
 
 
   delete(urgencia: Urgencia): void {
-   swal({
+  /*  swal({
      title: 'Está seguro?',
      text: `¿Seguro que desea eliminar la ficha de:  ${urgencia.nombrepaciente} ${urgencia.observacion}?`,
      type: 'warning',
@@ -95,7 +95,7 @@ export class UrgenciasComponent implements OnInit {
        )
 
      }
-   })
+   }) */
  }
 
 
