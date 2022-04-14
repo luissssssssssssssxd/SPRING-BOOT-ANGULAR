@@ -1,0 +1,75 @@
+<style >
+    @media (max-width: 768px) {
+    .specifictd {
+      min-width: 650px; /* adjust to desired wrapping */
+      display: table;
+      word-wrap: break-word;
+    }
+  }
+  </style>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <div class="container">
+  
+  
+    <div class="row">
+      <div class="col-12">
+        <div class="my-2 text-left">
+  
+          <button *ngIf="authservice.hasRole('ROLE_USER')"    class="btn btn-rounded btn-primary" type="button" [routerLink]="['/estados/form']">
+            Crear Registro
+          </button>
+            <button *ngIf="authservice.hasRole('ROLE_ADMIN')"  class="btn btn-rounded btn-info float-right" type="button" name="button" (click)='export()' >EXCEL</button>
+  
+        </div>
+        <div class="table-responsive">
+          <div  *ngIf="estados?.length == 0" class="alert alert-info">
+            No hay registros en la base de datos
+          </div>
+          <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar.."
+          [(ngModel)]="filterpost"
+          name="filterpost"
+        />
+          <table class="table" *ngIf="estados?.length>0">
+            <thead>
+              <tr>
+  
+  
+                <th>id</th>
+                <th>Estado</th>
+                <th  *ngIf="authservice.hasRole('ROLE_ADMIN')">
+                  Editar
+                </th>
+                <th  *ngIf="authservice.hasRole('ROLE_ADMIN')">
+                  Eliminar
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+  
+              <tr *ngFor="let estado of estados | filter: filterpost">
+                <td>{{ estado.id }}</td>
+                <td>{{ estado.estadoimpresora }}</td>
+                <td  *ngIf="authservice.hasRole('ROLE_ADMIN')">
+                  <button class="btn" [routerLink]="['/estados/form',estado.id]"><i class="fa fa-edit"></i></button>
+                </td>
+  
+                <td *ngIf="authservice.hasRole('ROLE_ADMIN')">
+                  <button class="btn" name="eliminar" (click)='delete(estado)'><i class="fa fa-trash"></i></button>
+                </td>
+  
+              </tr>
+  
+  
+  
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

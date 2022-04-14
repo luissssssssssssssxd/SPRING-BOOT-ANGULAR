@@ -1,0 +1,50 @@
+<ul class="alert alert-danger" *ngIf="errores?.length>0">
+    <li *ngFor="let err of errores">
+    {{err}}
+  </li>
+  </ul>
+
+
+  <div class="card bg-dark text-white">
+    <div class="card-header"></div>
+    <div class="card-body">
+
+
+  <form #formestado="ngForm" >
+    <div class="form-group row">
+      <label for="" class="col-form-label col-sm-2">Estado</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" [(ngModel)]="estado.estadoimpresora" name="nombrearea"  #nombrearea="ngModel" >
+    <div class="alert alert-danger" *ngIf="nombrearea.invalid && (nombrearea.dirty || nombrearea.touched) ">
+      <div *ngIf="nombrearea.errors.required">
+        Nombre es requerido
+
+      </div>
+    </div>
+      </div>
+    </div>
+
+
+
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!estado.id else elseBlock" [disabled]="!formestado.form.valid">Crear</button>
+    <ng-template #elseBlock>
+      <button class="btn btn-primary" role="button" (click)='update()'  [disabled]="!formestado.form.valid">Editar</button>
+
+    </ng-template>
+    <button class="btn btn-warning float-right" role="button" [routerLink]="['/estados/']"  >Volver</button>
+
+
+
+      </div>
+    </div>
+
+  </form>
+
+
+
+
+    </div>
+
+  </div>

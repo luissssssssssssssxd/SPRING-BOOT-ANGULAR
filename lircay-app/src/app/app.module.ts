@@ -22,6 +22,9 @@ import {HttpClientModule} from '@angular/common/http';
 import { AreaComponent } from './areas/area.component';
 import { FormareaComponent } from './areas/formarea.component';
 import { MarcaComponent } from './marcas/marca.component';
+import { ImpresorasComponent } from './impresoras/impresoras.component';
+import { EstadosComponent } from './estados/estados.component';
+import { FormestadosComponent } from './estados/formestados.component';
 
 
 
@@ -31,11 +34,14 @@ const routes:Routes =[
   {path:'urgencias',component:UrgenciasComponent},
   {path:'areas',component:AreaComponent},
   {path:'marcas',component:MarcaComponent},
+  {path:'estados',component:EstadosComponent},
   {path:'urgencias/form',component:FormComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'urgencias/form/:id',component:FormComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'login',component:LoginComponent},
   {path:'areas/form',component:FormareaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'areas/form/:id',component:FormareaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
+  {path:'estados/form',component:FormestadosComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
+  {path:'estados/form/:id',component:FormestadosComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
 
 
 ];
@@ -51,7 +57,10 @@ const routes:Routes =[
     FilterPipe,
     AreaComponent,
     FormareaComponent,
-    MarcaComponent
+    MarcaComponent,
+    ImpresorasComponent,
+    EstadosComponent,
+    FormestadosComponent
   ],
   imports: [
     BrowserModule,

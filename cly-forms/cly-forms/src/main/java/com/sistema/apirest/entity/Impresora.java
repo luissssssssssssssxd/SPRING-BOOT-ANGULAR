@@ -25,33 +25,36 @@ public class Impresora implements Serializable {
 
     private String observacion;
 
-    @ManyToOne
-    @JoinColumn(name = "estado_id")
-    private Estado estado;
-
+    
     @ManyToOne
     @JoinColumn(name = "marca")
     private Marca marca;
-
+    
     public Marca getMarca() {
         return marca;
     }
-
+    
     public void setMarca(Marca marca) {
         this.marca = marca;
+    }
+    
+   
+    
+    @ManyToOne
+    @JoinColumn(name = "estado_id")
+    private Estado_imprsora estado;
+
+    public Estado_imprsora getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado_imprsora estado) {
+        this.estado = estado;
     }
 
     @ManyToOne
     @JoinColumn(name = "modelo_id")
     private Modelo modelo;
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
 
     public Modelo getModelo() {
         return modelo;
