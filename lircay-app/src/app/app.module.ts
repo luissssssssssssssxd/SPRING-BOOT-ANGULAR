@@ -25,7 +25,8 @@ import { MarcaComponent } from './marcas/marca.component';
 import { FormmarcaComponent } from './marcas/formmarca.component';
 import { NgProgressModule } from "ngx-progressbar";
 import { NgProgressHttpModule } from "ngx-progressbar/http";
-
+import { DataTablesModule } from 'angular-datatables';
+import { MaterialModule } from './material.module';
 
 
 
@@ -64,6 +65,8 @@ const routes:Routes =[
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    DataTablesModule,
+    MaterialModule,
     RouterModule.forRoot(routes),
     [NgxMaterialTimepickerModule],
      BrowserAnimationsModule,

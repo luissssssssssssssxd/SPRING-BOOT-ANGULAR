@@ -18,12 +18,8 @@
 </div> -->
 
 <style>
-  @media (max-width: 768px) {
-    .specifictd {
-      min-width: 650px; /* adjust to desired wrapping */
-      display: table;
-      word-wrap: break-word;
-    }
+  table {
+    width: 100%;
   }
 </style>
 
@@ -31,7 +27,7 @@
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 />
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <div class="col-12">
       <div class="my-2 text-left">
@@ -86,5 +82,34 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<div class="mat-elevation-z1">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+      <td mat-cell *matCellDef="let marca" class="left-text">
+        <button class="btn" [routerLink]="['/marcas/form', marca.id]">
+          <i class="fa fa-edit"></i>
+        </button>
+        <button class="btn" name="eliminar" (click)="delete(marca)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ID">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let marca">{{ marca.id }}</td>
+    </ng-container>
+    <ng-container matColumnDef="Nombre">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let marca">{{ marca.nombre }}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
 </div>
 <ng-progress></ng-progress>
