@@ -48,7 +48,8 @@ export class UrgenciasService {
     return this.http.get<Urgencia[]>(this.urlEndPoint);
   }
 
-//Registrar nuevo dato
+
+// Registrar nuevo dato
   create(urgencia:Urgencia): Observable<any>{
     return this.http.post(this.urlEndPoint,urgencia).pipe(
       catchError(e => {

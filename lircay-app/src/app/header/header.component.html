@@ -16,7 +16,10 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/areas']">Area</a>
       </li>
-    
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/marcas']">Marcas</a>
+      </li>
+
     </ul>
     <ul class="navbar-nav navbar-right">
       <li *ngIf="!authservice.isAuthenticated()"><a [routerLink]="['/login']" class="btn btn-outline-primary">Sign In</a></li>
