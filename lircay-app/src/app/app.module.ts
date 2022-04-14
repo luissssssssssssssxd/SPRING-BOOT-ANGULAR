@@ -22,6 +22,9 @@ import {HttpClientModule} from '@angular/common/http';
 import { AreaComponent } from './areas/area.component';
 import { FormareaComponent } from './areas/formarea.component';
 import { MarcaComponent } from './marcas/marca.component';
+import { FormmarcaComponent } from './marcas/formmarca.component';
+import { NgProgressModule } from "ngx-progressbar";
+import { NgProgressHttpModule } from "ngx-progressbar/http";
 
 
 
@@ -31,6 +34,8 @@ const routes:Routes =[
   {path:'urgencias',component:UrgenciasComponent},
   {path:'areas',component:AreaComponent},
   {path:'marcas',component:MarcaComponent},
+  {path:'marcas/form',component:FormmarcaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
+  {path:'marcas/form/:id',component:FormmarcaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'urgencias/form',component:FormComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'urgencias/form/:id',component:FormComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'login',component:LoginComponent},
@@ -51,7 +56,8 @@ const routes:Routes =[
     FilterPipe,
     AreaComponent,
     FormareaComponent,
-    MarcaComponent
+    MarcaComponent,
+    FormmarcaComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +67,11 @@ const routes:Routes =[
     RouterModule.forRoot(routes),
     [NgxMaterialTimepickerModule],
      BrowserAnimationsModule,
+     NgProgressModule.withConfig({
+      spinnerPosition: "left",
+      color: "white"
+    }),
+    NgProgressHttpModule
 
   ],
   providers: [UrgenciasService,
