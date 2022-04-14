@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
   templateUrl: './header.component.html'
 })
 export class HeaderComponent{
-  title:string ='Clinica Lircay';
+  title:string ='';
 
 
   constructor(public authservice:AuthService,

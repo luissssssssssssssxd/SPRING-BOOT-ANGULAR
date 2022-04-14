@@ -22,10 +22,11 @@ import {HttpClientModule} from '@angular/common/http';
 import { AreaComponent } from './areas/area.component';
 import { FormareaComponent } from './areas/formarea.component';
 import { MarcaComponent } from './marcas/marca.component';
-import { ImpresorasComponent } from './impresoras/impresoras.component';
-import { EstadosComponent } from './estados/estados.component';
-import { FormestadosComponent } from './estados/formestados.component';
-
+import { FormmarcaComponent } from './marcas/formmarca.component';
+import { NgProgressModule } from "ngx-progressbar";
+import { NgProgressHttpModule } from "ngx-progressbar/http";
+import { DataTablesModule } from 'angular-datatables';
+import { MaterialModule } from './material.module';
 
 
 
@@ -34,7 +35,8 @@ const routes:Routes =[
   {path:'urgencias',component:UrgenciasComponent},
   {path:'areas',component:AreaComponent},
   {path:'marcas',component:MarcaComponent},
-  {path:'estados',component:EstadosComponent},
+  {path:'marcas/form',component:FormmarcaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
+  {path:'marcas/form/:id',component:FormmarcaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'urgencias/form',component:FormComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'urgencias/form/:id',component:FormComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'login',component:LoginComponent},
@@ -58,18 +60,23 @@ const routes:Routes =[
     AreaComponent,
     FormareaComponent,
     MarcaComponent,
-    ImpresorasComponent,
-    EstadosComponent,
-    FormestadosComponent
+    FormmarcaComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    DataTablesModule,
+    MaterialModule,
     RouterModule.forRoot(routes),
     [NgxMaterialTimepickerModule],
      BrowserAnimationsModule,
+     NgProgressModule.withConfig({
+      spinnerPosition: "left",
+      color: "white"
+    }),
+    NgProgressHttpModule
 
   ],
   providers: [UrgenciasService,
