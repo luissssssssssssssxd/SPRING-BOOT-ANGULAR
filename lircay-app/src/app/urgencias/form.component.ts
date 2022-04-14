@@ -3,6 +3,7 @@ import { Urgencia } from './urgencia';
 import { UrgenciasService } from './urgencias.service';
 import {Router,ActivatedRoute} from '@angular/router';
 import swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -40,7 +41,7 @@ export class FormComponent implements OnInit {
   this.urgenciaservice.create(this.urgencia)
   .subscribe(json =>{
     this.router.navigate(['/urgencias'])
-   /*  swal('Nuevo Registro',`Registro ${json.urgencia.nombrepaciente} creado con exito!`,'success'); */
+    Swal.fire('Nuevo Registro',`Registro ${json.urgencia.nombrepaciente} creado con exito!`,'success');
 
   },
   err=> {
@@ -56,7 +57,7 @@ export class FormComponent implements OnInit {
     this.urgenciaservice.update(this.urgencia)
     .subscribe(json =>{
       this.router.navigate(['/urgencias'])
-      /* swal('Registro Actualizado',`Registro ${json.urgencia.nombrepaciente} actualizado con exito`,'success') */
+       Swal.fire('Registro Actualizado',`Registro ${json.urgencia.nombrepaciente} actualizado con exito`,'success')
     },
     err=> {
       this.errores = err.error.errors as string [];

@@ -6,6 +6,7 @@ import swal from 'sweetalert2'
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import {HttpClient} from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 
 
@@ -68,34 +69,37 @@ export class UrgenciasComponent implements OnInit {
 
 
   delete(urgencia: Urgencia): void {
-  /*  swal({
-     title: 'Está seguro?',
-     text: `¿Seguro que desea eliminar la ficha de:  ${urgencia.nombrepaciente} ${urgencia.observacion}?`,
-     type: 'warning',
-     showCancelButton: true,
-     confirmButtonColor: '#3085d6',
-     cancelButtonColor: '#d33',
-     confirmButtonText: 'Si, eliminar!',
-     cancelButtonText: 'No, cancelar!',
-     confirmButtonClass: 'btn btn-success',
-     cancelButtonClass: 'btn btn-danger',
-     buttonsStyling: false,
-     reverseButtons: true
-   }).then((result) => {
-     if (result.value) {
-       this.urgenciaservice.delete(urgencia.id).subscribe(
-         response => {
-           this.urgencias = this.urgencias.filter(cli => cli !== urgencia)
-           swal(
-             'Ficha Eliminado!',
-             `Paciente ${urgencia.nombrepaciente} eliminado con éxito.`,
-             'success'
-           )
-         }
-       )
 
-     }
-   }) */
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: `¿Seguro que desea eliminar la ficha de:  ${urgencia.nombrepaciente} ${urgencia.observacion}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si,eliminar!',
+      cancelButtonText: 'No, cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this.urgenciaservice.delete(urgencia.id).subscribe(
+          response => {
+            this.urgencias = this.urgencias.filter(cli => cli !== urgencia)
+            Swal.fire(
+              'Ficha Eliminado!',
+              `Paciente ${urgencia.nombrepaciente} eliminado con éxito.`,
+              'success'
+            )
+          }
+        )
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        )
+      }
+    })
+
+
+
  }
 
 

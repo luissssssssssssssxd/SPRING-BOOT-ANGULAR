@@ -8,6 +8,7 @@ import { AuthService } from '../auth.service';
 import swal from 'sweetalert2';
 import {catchError} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Injectable()
@@ -33,7 +34,7 @@ catchError(e => {
   }
 
   if(e.status==403){
-  /*   swal('Acceso denegado',`Hola ${this.authservice.usuario.username} no tienes acceso a este recurso`,'warning'); */
+    Swal.fire('Acceso denegado',`Hola ${this.authservice.usuario.username} no tienes acceso a este recurso`,'warning');
     this.router.navigate(['/urgencias']);
   }
   return throwError(e);

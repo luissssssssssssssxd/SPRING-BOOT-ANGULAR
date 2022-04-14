@@ -8,7 +8,7 @@ import {HeaderComponent} from './header/header.component';
 import { UrgenciasComponent } from './urgencias/urgencias.component';
 import { HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FormComponent } from './urgencias/form.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './usuarios/login.component';
@@ -21,6 +21,7 @@ import { FilterPipe } from './filter.pipe';
 import {HttpClientModule} from '@angular/common/http';
 import { AreaComponent } from './areas/area.component';
 import { FormareaComponent } from './areas/formarea.component';
+import { MarcaComponent } from './marcas/marca.component';
 
 
 
@@ -29,6 +30,7 @@ const routes:Routes =[
   {path:'',redirectTo:'/urgencias',pathMatch:'full'},
   {path:'urgencias',component:UrgenciasComponent},
   {path:'areas',component:AreaComponent},
+  {path:'marcas',component:MarcaComponent},
   {path:'urgencias/form',component:FormComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'urgencias/form/:id',component:FormComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'login',component:LoginComponent},
@@ -48,12 +50,14 @@ const routes:Routes =[
     LoginComponent,
     FilterPipe,
     AreaComponent,
-    FormareaComponent
+    FormareaComponent,
+    MarcaComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes),
     [NgxMaterialTimepickerModule],
      BrowserAnimationsModule,
