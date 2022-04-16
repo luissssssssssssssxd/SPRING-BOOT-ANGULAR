@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import Swal from 'sweetalert2';
+import { NotificationService } from '../notification.service';
 import { Marca } from './marca';
 
 @Injectable({
@@ -11,7 +13,8 @@ import { Marca } from './marca';
 export class MarcaService {
   private urlEndPoint: string = 'http://localhost:8080/api/marcas';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router,
+    private notifyService : NotificationService) {}
 
   getMarcas(): Observable<Marca[]> {
     return this.http
@@ -31,8 +34,10 @@ export class MarcaService {
           return throwError(e);
         }
         if (e.error.mensaje) {
+          Swal.fire('Error',`Hola ${e.error.mensaje} `,'error');
           console.error(e.error.mensaje);
         }
+        Swal.fire('Error',`Hola ${e.error.mensaje} `,'error');
 
         console.error(e.error.mensaje);
         return throwError(e);
@@ -45,6 +50,7 @@ export class MarcaService {
     return this.http.get<Marca>(`${this.urlEndPoint}/${id}`).pipe(
       catchError((e) => {
         if (e.status != 401 && e.error.mensaje) {
+          this.notifyService.showError(`Error BD ${e.error.mensaje} `,"Error");
           this.router.navigate(['/marcas']);
           console.error(e.error.mensaje);
         }
@@ -61,6 +67,7 @@ export class MarcaService {
           return throwError(e);
         }
         if (e.error.mensaje) {
+          Swal.fire('Error',`Error BD ${e.error.mensaje} `,'error');
           console.error(e.error.mensaje);
         }
         return throwError(e);
@@ -73,6 +80,7 @@ export class MarcaService {
     return this.http.delete<Marca>(`${this.urlEndPoint}/${id}`).pipe(
       catchError((e) => {
         if (e.error.mensaje) {
+          Swal.fire('Error',`Error BD ${e.error.mensaje} `,'error');
           console.error(e.error.mensaje);
         }
         return throwError(e);

@@ -27,7 +27,12 @@ import { NgProgressModule } from "ngx-progressbar";
 import { NgProgressHttpModule } from "ngx-progressbar/http";
 import { DataTablesModule } from 'angular-datatables';
 import { MaterialModule } from './material.module';
-
+import { FormestadosComponent } from './estados/formestados.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MatTableModule } from '@angular/material/table';
+import { NotifierModule, NotifierOptions } from 'angular-notifier';
+import { ToastrModule } from 'ngx-toastr';
 
 
 const routes:Routes =[
@@ -48,6 +53,8 @@ const routes:Routes =[
 
 ];
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,8 +74,10 @@ const routes:Routes =[
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    DataTablesModule,
     MaterialModule,
+    MatPaginatorModule,
+    MatTableModule,
+    NotifierModule,
     RouterModule.forRoot(routes),
     [NgxMaterialTimepickerModule],
      BrowserAnimationsModule,
@@ -76,7 +85,14 @@ const routes:Routes =[
       spinnerPosition: "left",
       color: "white"
     }),
-    NgProgressHttpModule
+    NgProgressHttpModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      progressBar:true,
+      progressAnimation:'decreasing'
+    }),
 
   ],
   providers: [UrgenciasService,
