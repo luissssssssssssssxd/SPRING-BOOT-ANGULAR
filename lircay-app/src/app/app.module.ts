@@ -25,15 +25,14 @@ import { MarcaComponent } from './marcas/marca.component';
 import { FormmarcaComponent } from './marcas/formmarca.component';
 import { NgProgressModule } from "ngx-progressbar";
 import { NgProgressHttpModule } from "ngx-progressbar/http";
-import { DataTablesModule } from 'angular-datatables';
 import { MaterialModule } from './material.module';
 import { FormestadosComponent } from './estados/formestados.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table'
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { ToastrModule } from 'ngx-toastr';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 const routes:Routes =[
   {path:'',redirectTo:'/urgencias',pathMatch:'full'},
@@ -73,10 +72,12 @@ const routes:Routes =[
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
     MaterialModule,
+    ReactiveFormsModule,
     MatPaginatorModule,
+    MatFormFieldModule,
     MatTableModule,
+    MatInputModule,
     NotifierModule,
     RouterModule.forRoot(routes),
     [NgxMaterialTimepickerModule],
