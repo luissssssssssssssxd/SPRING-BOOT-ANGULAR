@@ -1,5 +1,4 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -33,6 +32,8 @@ import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { ToastrModule } from 'ngx-toastr';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from "@angular/common";
+import { BrowserModule } from '@angular/platform-browser';
 
 const routes:Routes =[
   {path:'',redirectTo:'/urgencias',pathMatch:'full'},
@@ -73,6 +74,7 @@ const routes:Routes =[
     HttpClientModule,
     FormsModule,
     MaterialModule,
+    CommonModule,
     ReactiveFormsModule,
     MatPaginatorModule,
     MatFormFieldModule,
