@@ -3,17 +3,25 @@ package com.sistema.apirest.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "impresora")
 public class Impresora implements Serializable {
+
+    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +29,7 @@ public class Impresora implements Serializable {
 
     private String numeroserie;
 
-    private Date fechaingreso;
+    private Date fecha_mov;
 
     private String observacion;
 
@@ -63,6 +71,17 @@ public class Impresora implements Serializable {
     public void setModelo(Modelo modelo) {
         this.modelo = modelo;
     }
+    @ManyToOne
+    @JoinColumn(name = "area_id")
+    private Area area;
+
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
+    }
 
     public Long getId() {
         return id;
@@ -80,12 +99,12 @@ public class Impresora implements Serializable {
         this.numeroserie = numeroserie;
     }
 
-    public Date getFechaingreso() {
-        return fechaingreso;
+    public Date getfecha_mov() {
+        return fecha_mov;
     }
 
-    public void setFechaingreso(Date fechaingreso) {
-        this.fechaingreso = fechaingreso;
+    public void setfecha_mov(Date fecha_mov) {
+        this.fecha_mov = fecha_mov;
     }
 
     public String getObservacion() {
@@ -95,5 +114,17 @@ public class Impresora implements Serializable {
     public void setObservacion(String observacion) {
         this.observacion = observacion;
     }
+
+    @PrePersist
+    public void PerPersist(){
+        fecha_mov = new Date();
+    }
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "fecha_mov")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date fecha_movimiento;
+
+    
 
 }

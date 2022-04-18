@@ -1,74 +1,60 @@
-<style >
-  @media (max-width: 768px) {
-  .specifictd {
-    min-width: 650px; /* adjust to desired wrapping */
-    display: table;
-    word-wrap: break-word;
-  }
+<style>
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
 }
+table {
+  width: 100%;
+}
+
 </style>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+  integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/regular.min.css"
+  integrity="sha512-YoxvmIzlVlt4nYJ6QwBqDzFc+2aXL7yQwkAuscf2ZAg7daNQxlgQHV+LLRHnRXFWPHRvXhJuBBjQqHAqRFkcVw=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<div class="container">
 
 
-  <div class="row">
-    <div class="col-12">
-      <div class="my-2 text-left">
+<button *ngIf="authservice.hasRole('ROLE_USER')" mat-raised-button color="primary" [routerLink]="['/areas/form']">
+  Crear Registro
+</button>
 
-        <button *ngIf="authservice.hasRole('ROLE_USER')"    class="btn btn-rounded btn-primary" type="button" [routerLink]="['/areas/form']">
-          Crear Registro
+<mat-form-field appearance="standard">
+  <mat-label>Filtro</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="AREA" #input />
+</mat-form-field>
+<div class="mat-elevation-z1">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+      <td mat-cell *matCellDef="let area" class="left-text">
+        <button class="btn" [routerLink]="['/areas/form', area.id]">
+          <i class="fa-regular fa-pen-to-square"></i>
         </button>
-          <button *ngIf="authservice.hasRole('ROLE_ADMIN')"  class="btn btn-rounded btn-info float-right" type="button" name="button" (click)='export()' >EXCEL</button>
+        <button class="btn" name="eliminar" (click)="delete(area)">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </td>
+    </ng-container>
 
-      </div>
-      <div class="table-responsive">
-        <div  *ngIf="areas?.length == 0" class="alert alert-info">
-          No hay registros en la base de datos
-        </div>
-        <input
-        type="text"
-        class="form-control"
-        placeholder="Buscar.."
-        [(ngModel)]="filterpost"
-        name="filterpost"
-      />
-        <table class="table" *ngIf="areas?.length>0">
-          <thead>
-            <tr>
+    <ng-container matColumnDef="ID">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let area">{{ area.id }}</td>
+    </ng-container>
+    <ng-container matColumnDef="Nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+      <td mat-cell *matCellDef="let area">{{ area.nombrearea }}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 
-
-              <th>id</th>
-              <th>Area</th>
-              <th  *ngIf="authservice.hasRole('ROLE_ADMIN')">
-                Editar
-              </th>
-              <th  *ngIf="authservice.hasRole('ROLE_ADMIN')">
-                Eliminar
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-
-            <tr *ngFor="let area of areas | filter: filterpost">
-              <td>{{ area.id }}</td>
-              <td>{{ area.nombrearea }}</td>
-              <td  *ngIf="authservice.hasRole('ROLE_ADMIN')">
-                <button class="btn" [routerLink]="['/areas/form',area.id]"><i class="fa fa-edit"></i></button>
-              </td>
-
-              <td *ngIf="authservice.hasRole('ROLE_ADMIN')">
-                <button class="btn" name="eliminar" (click)='delete(area)'><i class="fa fa-trash"></i></button>
-              </td>
-
-            </tr>
-
-
-
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 </div>
+<ng-progress></ng-progress>
+<notifier-container></notifier-container>
+

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationService } from '../notification.service';
 import { Area } from './area';
 import { AreaService } from './area.service';
 
@@ -16,7 +17,8 @@ export class FormareaComponent implements OnInit {
 
   constructor(public areaservice:AreaService,
     public router:Router,
-    public activatedroute: ActivatedRoute) { }
+    public activatedroute: ActivatedRoute,
+    private notifyService: NotificationService) { }
 
 
   ngOnInit(): void {
@@ -37,8 +39,23 @@ export class FormareaComponent implements OnInit {
   public create():void{
     this.areaservice.create(this.area).subscribe(json => {
       this.router.navigate(['/areas'])
+      this.notifyService.showSuccess(`Area: ${json.area.nombrearea}, creada exitosamente`,"OK")
       
     })
+  }
+
+  update(): void {
+    this.areaservice.update(this.area).subscribe(
+      (json) => {
+        this.router.navigate(['/areas']);
+        this.notifyService.showSuccess( `Registro ${json.area.nombrearea} actualizado con exito`,"OK");
+      },
+      (err) => {
+        this.errores = err.error.errors as string[];
+        console.error('Codigo error backend' + err.status);
+        console.error(err.error.errors);
+      }
+    );
   }
 
 }

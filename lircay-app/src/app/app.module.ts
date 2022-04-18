@@ -34,6 +34,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from '@angular/platform-browser';
+import { MatSortModule } from '@angular/material/sort';
 
 const routes:Routes =[
   {path:'',redirectTo:'/urgencias',pathMatch:'full'},
@@ -81,6 +82,7 @@ const routes:Routes =[
     MatTableModule,
     MatInputModule,
     NotifierModule,
+    MatSortModule,
     RouterModule.forRoot(routes),
     [NgxMaterialTimepickerModule],
      BrowserAnimationsModule,
