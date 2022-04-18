@@ -3,20 +3,21 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import Swal from 'sweetalert2';
+import { NotificationService } from '../notification.service';
 import { Estado } from './estado';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EstadosService {
+export class EstadoService {
 
   private urlEndPoint:string ='http://localhost:8080/api/estados';
 
-  constructor(
-    private http:HttpClient,
-    private router:Router
-  ) { }
 
+  constructor( private http:HttpClient,
+    private router:Router,
+    private notifyService : NotificationService) { }
 
   getEstados():Observable<Estado[]>{
     return this.http.get<Estado[]>(this.urlEndPoint);
@@ -31,8 +32,10 @@ export class EstadosService {
         if(e.status == 400){
           return throwError(e);
         }else if(e.error.mensaje){
+          Swal.fire('Error',`${e.error.mensaje} `,'error');
           console.error(e.error.mensaje);
         }
+        Swal.fire('Error',` ${e.error.mensaje} `,'error');
 
         console.error(e.error.mensaje);
         return throwError(e);
@@ -46,6 +49,7 @@ export class EstadosService {
     return this.http.get<Estado>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e=>{
         if(e.status != 401 && e.error.mensaje){
+          this.notifyService.showError(`Error BD ${e.error.mensaje} `,"Error");
           this.router.navigate(['/estados']);
           console.error(e.error.mensaje);
         }
@@ -64,6 +68,7 @@ export class EstadosService {
         if(e.status == 400){
           return throwError(e);
         }else if(e.error.mensaje){
+          Swal.fire('Error',`Error BD ${e.error.mensaje} `,'error');
           console.error(e.error.mensaje);
         }
         return throwError(e);
@@ -83,6 +88,4 @@ export class EstadosService {
       })
     )
   }
-
-
 }

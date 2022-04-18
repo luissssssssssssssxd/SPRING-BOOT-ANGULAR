@@ -25,7 +25,6 @@ import { FormmarcaComponent } from './marcas/formmarca.component';
 import { NgProgressModule } from "ngx-progressbar";
 import { NgProgressHttpModule } from "ngx-progressbar/http";
 import { MaterialModule } from './material.module';
-import { FormestadosComponent } from './estados/formestados.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table'
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
@@ -35,12 +34,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from '@angular/platform-browser';
 import { MatSortModule } from '@angular/material/sort';
+import { ListadoComponent } from './estado/listado.component';
+import { FormestadoComponent } from './estado/formestado.component';
 
 const routes:Routes =[
   {path:'',redirectTo:'/urgencias',pathMatch:'full'},
   {path:'urgencias',component:UrgenciasComponent},
   {path:'areas',component:AreaComponent},
   {path:'marcas',component:MarcaComponent},
+  {path:'estados',component:ListadoComponent},
+  {path:'estados/form/:id',component:FormestadoComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
+  {path:'estados/form',component:FormestadoComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'marcas/form',component:FormmarcaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'marcas/form/:id',component:FormmarcaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'urgencias/form',component:FormComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
@@ -48,8 +52,7 @@ const routes:Routes =[
   {path:'login',component:LoginComponent},
   {path:'areas/form',component:FormareaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'areas/form/:id',component:FormareaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
-  {path:'estados/form',component:FormestadosComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
-  {path:'estados/form/:id',component:FormestadosComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
+
 
 
 ];
@@ -68,7 +71,9 @@ const routes:Routes =[
     AreaComponent,
     FormareaComponent,
     MarcaComponent,
-    FormmarcaComponent
+    FormmarcaComponent,
+    ListadoComponent,
+    FormestadoComponent
   ],
   imports: [
     BrowserModule,
