@@ -1,1 +1,67 @@
-<p>impresoras works!</p>
+<style>
+
+    .mat-form-field {
+      font-size: 14px;
+      width: 100%;
+    }
+    table {
+      width: 100%;
+    }
+    
+</style>
+
+<button *ngIf="authservice.hasRole('ROLE_USER')" mat-raised-button color="primary" [routerLink]="['/impresoras/form']">
+    Crear Registro
+</button>
+
+<mat-form-field appearance="standard">
+    <mat-label>Filtro</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="IMPRESORA" #input />
+  </mat-form-field>
+  <div class="mat-elevation-z1">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+        <td mat-cell *matCellDef="let impresora" class="left-text">
+          <button class="btn" [routerLink]="['/impresoras/form', impresora.numeroserie]">
+            <i class="fa-regular fa-pen-to-square"></i>
+          </button>
+          <button class="btn" name="eliminar" (click)="delete(impresora)">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="Numero de serie">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero de serie</th>
+        <td mat-cell *matCellDef="let impresora">{{ impresora.numeroserie }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Area">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Area</th>
+        <td mat-cell *matCellDef="let impresora">{{ impresora.area.nombrearea }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Estado">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+        <td mat-cell *matCellDef="let impresora">{{ impresora.estado.estadoimpresora }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Marca">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Marca</th>
+        <td mat-cell *matCellDef="let impresora">{{ impresora.marca.nombre }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Modelo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Modelo</th>
+        <td mat-cell *matCellDef="let impresora">{{ impresora.modelo.modelo }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Actualizacion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ultima modificacion</th>
+        <td mat-cell *matCellDef="let impresora">{{ impresora.fecha_mov }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+  <ng-progress></ng-progress>
+  <notifier-container></notifier-container>
+

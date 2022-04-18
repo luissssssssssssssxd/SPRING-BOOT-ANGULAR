@@ -36,6 +36,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatSortModule } from '@angular/material/sort';
 import { ListadoComponent } from './estado/listado.component';
 import { FormestadoComponent } from './estado/formestado.component';
+import { ImpresorasComponent } from './impresoras/impresoras.component';
 
 const routes:Routes =[
   {path:'',redirectTo:'/urgencias',pathMatch:'full'},
@@ -43,6 +44,7 @@ const routes:Routes =[
   {path:'areas',component:AreaComponent},
   {path:'marcas',component:MarcaComponent},
   {path:'estados',component:ListadoComponent},
+  {path:'impresoras',component:ImpresorasComponent},
   {path:'estados/form/:id',component:FormestadoComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'estados/form',component:FormestadoComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'marcas/form',component:FormmarcaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
@@ -73,7 +75,8 @@ const routes:Routes =[
     MarcaComponent,
     FormmarcaComponent,
     ListadoComponent,
-    FormestadoComponent
+    FormestadoComponent,
+    ImpresorasComponent
   ],
   imports: [
     BrowserModule,

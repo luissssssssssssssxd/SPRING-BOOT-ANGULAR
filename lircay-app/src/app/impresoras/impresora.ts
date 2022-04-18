@@ -1,5 +1,5 @@
 import { Area } from "../areas/area";
-import { Estado } from "../estados/estado";
+import { Estado } from "../estado/estado";
 import { Marca } from "../marcas/marca";
 import { Modelos } from "../marcas/modelos";
 
