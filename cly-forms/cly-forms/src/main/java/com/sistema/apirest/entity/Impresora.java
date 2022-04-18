@@ -11,9 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -21,12 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "impresora")
 public class Impresora implements Serializable {
 
-    
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String numeroserie;
 
     private Date fecha_mov;
@@ -83,14 +81,6 @@ public class Impresora implements Serializable {
         this.area = area;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNumeroserie() {
         return numeroserie;
     }
@@ -115,15 +105,8 @@ public class Impresora implements Serializable {
         this.observacion = observacion;
     }
 
-    @PrePersist
-    public void PerPersist(){
-        fecha_mov = new Date();
-    }
+    
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "fecha_mov")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date fecha_movimiento;
 
     
 

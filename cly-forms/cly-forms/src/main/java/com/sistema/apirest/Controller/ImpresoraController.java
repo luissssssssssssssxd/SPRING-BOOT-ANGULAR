@@ -41,14 +41,14 @@ public class ImpresoraController {
     }
 
     @Secured({"ROLE_ADMIN","ROLE_USER"})
-    @GetMapping("/impresoras/{id}")
-    public ResponseEntity<?> show(@PathVariable Long id){
+    @GetMapping("/impresoras/{numeroserie}")
+    public ResponseEntity<?> show(@PathVariable Long numeroserie){
         Impresora impresora = null;
         Map<String, Object> response = new HashMap<>();
 
 
         try {
-            impresora = impresoraService.findbyid(id);
+            impresora = impresoraService.findbyid(numeroserie);
     
             } catch (DataAccessException e) {
                 response.put("mensaje", "Error al realizar la consulta en la BD");
@@ -59,7 +59,7 @@ public class ImpresoraController {
             
     //		Si registro buscado en NULO
             if(impresora == null) {
-                response.put("mensaje", "La impresora  ID:  ".concat(id.toString().concat(" No existe en la BD")));
+                response.put("mensaje", "La impresora con el numero de serie:  ".concat(numeroserie.toString().concat(" No existe en la BD")));
                 return  new  ResponseEntity<>(response,HttpStatus.NOT_FOUND);
             }
             
@@ -112,10 +112,10 @@ public class ImpresoraController {
 	}
 
     @Secured({"ROLE_ADMIN"})
-	@PutMapping("/impresoras/{id}")
-	public ResponseEntity<?> update(@Valid @RequestBody Impresora impresora,BindingResult result, @PathVariable Long id) {
+	@PutMapping("/impresoras/{numeroserie}")
+	public ResponseEntity<?> update(@Valid @RequestBody Impresora impresora,BindingResult result, @PathVariable Long numeroserie) {
 		
-		Impresora datoactual = impresoraService.findbyid(id);
+		Impresora datoactual = impresoraService.findbyid(numeroserie);
 		Impresora marcaupd = null;
 		Impresora estadoupd = null;
 		Impresora modeloupd = null;
@@ -151,7 +151,7 @@ public class ImpresoraController {
 		
 		//Si registro buscado en NULO
 		if(datoactual == null) {
-			response.put("mensaje", "Error: no se pudo editar, la ficha ID;   ".concat(id.toString().concat(" No existe en la BD")));
+			response.put("mensaje", "Error: no se pudo editar, la impresora col el numero de serie;   ".concat(numeroserie.toString().concat(" No existe en la BD")));
 			return  new  ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 		}
 		try {
@@ -192,13 +192,13 @@ public class ImpresoraController {
 	}
 
     @Secured({"ROLE_ADMIN"})
-	@DeleteMapping("/impresoras/{id}")
-	public ResponseEntity<?> delete(@PathVariable Long id) {
+	@DeleteMapping("/impresoras/{numeroserie}")
+	public ResponseEntity<?> delete(@PathVariable Long numeroserie) {
 		
 		Map<String, Object> response = new HashMap<>();
 
 		try {
-			impresoraService.delete(id);
+			impresoraService.delete(numeroserie);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al eliminar en la BD");
 			response.put("mensaje", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
