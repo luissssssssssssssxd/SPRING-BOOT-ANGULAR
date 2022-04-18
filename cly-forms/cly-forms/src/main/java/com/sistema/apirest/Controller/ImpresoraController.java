@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.sistema.apirest.Service.IImpresoraService;
 import com.sistema.apirest.entity.Impresora;
 
 import java.util.HashMap;
@@ -106,7 +104,7 @@ public class ImpresoraController {
 			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 			
 		}
-		response.put("mensaje", "El area ha sido creado con exito");
+		response.put("mensaje", "La impresora ha sido creado con exito");
 		response.put("estado", impresoranew);
 			
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
