@@ -69,7 +69,8 @@ export class MarcaComponent implements OnInit {
     });
     Swal.showLoading();
     this.marcaservice.getMarcas().subscribe((marcas) => {
-      (this.marcas = marcas), console.log(this.marcas);
+      (this.marcas = marcas),
+       console.log(this.marcas);
       this.dataArray = marcas;
       this.dataSource = new MatTableDataSource<Marca>(this.dataArray);
       this.dataSource.paginator = this.paginator;
