@@ -1,0 +1,38 @@
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+  <li *ngFor="let err of errores">
+    {{ err }}
+  </li>
+</ul>
+
+
+<div class="container ">
+  <h2 class="h2">Formulario Estados</h2>
+  <form class="example-form" #formestado="ngForm" >
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Estado Impresora</mat-label>
+      <input type="text" matInput [formControl]="estadoimpresora" placeholder=""  [(ngModel)]="estado.estadoimpresora" name="estadoimpresora"
+     >
+      <mat-error *ngIf="estadoimpresora.hasError('required')">
+        Estado es <strong>requerido</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <button mat-raised-button color="primary" role="button" (click)="create()" *ngIf="!estado.id; else elseBlock"
+          [disabled]="!formestado.form.valid">
+          Crear
+        </button>
+        <ng-template #elseBlock>
+          <button mat-raised-button color="primary" role="button" (click)="update()" [disabled]="!formestado.form.valid">
+            Editar
+          </button>
+        </ng-template>
+        <button class="float-right" mat-raised-button color="warn" role="button" [routerLink]="['/estados']">
+          Volver
+        </button>
+      </div>
+    </div>
+  </form>
+
+</div>

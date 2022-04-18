@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { NotificationService } from '../notification.service';
@@ -11,6 +12,8 @@ import { MarcaService } from './marca.service';
   styleUrls: ['./formmarca.component.css'],
 })
 export class FormmarcaComponent implements OnInit {
+
+  nombremarca = new FormControl('', [Validators.required]);
   public marca: Marca = new Marca();
 
   public errores: string[];
