@@ -1,22 +1,39 @@
-<div>
-  <label for="Marcas">Marca</label>
-  <select [(ngModel)]="marcaElegida">
-    <option [ngValue]="null">Elige marca</option>
-    <option *ngFor="let marca of marcas" [ngValue]="marca">
-      {{marca.nombre}}
-    </option>
-  </select>
-</div>
-<br>
-<br>
-<div *ngIf="marcaElegida">
-  <label for="Modelo">Modelo</label>
-  <select>
-    <option [ngValue]="null">Elige modelo</option>
-    <option *ngFor="let modelo of marcaElegida.modelos" [ngValue]="modelo">{{modelo.modelo}}</option>
-  </select>
+
+
+<ul class="alert alert-danger" *ngIf="errores?.length>0">
+  <li *ngFor="let err of errores">
+  {{err}}
+</li>
+</ul>
+<div class="container">
+  <h2 class="h2">Formulario Impresora</h2>
+  <form class="example-form" #formimpresora="ngForm" >
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Numero de serie</mat-label>
+      <input type="text" matInput [formControl]="numeroserie" placeholder=""  [(ngModel)]="impresora.numeroserie" name="numeroserie"
+     >
+      <mat-error *ngIf="numeroserie.hasError('required')">
+        Marca es <strong>requerido</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <button mat-raised-button color="primary" role="button" (click)="create()"[disabled]="!formimpresora.form.valid">
+          Crear
+        </button>
+          <button mat-raised-button color="primary" role="button" (click)="update()" [disabled]="!formimpresora.form.valid">
+            Editar
+          </button>
+        <button class="float-right" mat-raised-button color="warn" role="button" [routerLink]="['/impresoras']">
+          Volver
+        </button>
+      </div>
+    </div>
+  </form>
+
 </div>
 
-<ng-select2 [data]="exampleData"
-            [width]="300">
-</ng-select2>
+
+
+

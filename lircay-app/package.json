@@ -31,6 +31,7 @@
     "file-saver": "^2.0.5",
     "jquery": "^3.6.0",
     "ng-circle-progress": "^1.6.0",
+    "ng-select2": "1.2.0",
     "ng-select2-component": "^8.1.0",
     "ng2-charts": "^2.4.3",
     "ngx-material-timepicker": "^5.5.3",
@@ -44,8 +45,7 @@
     "sweetalert2": "^9.17.1",
     "tslib": "^2.1.0",
     "xlsx": "^0.17.1",
-    "zone.js": "~0.11.4",
-    "ng-select2": "1.2.0"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^13.3.2",

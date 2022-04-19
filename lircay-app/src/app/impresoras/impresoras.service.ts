@@ -22,8 +22,8 @@ export class ImpresorasService {
     private notifyService: NotificationService
   ) { }
 
-  getImpresoras(): Observable<Impresora[]> {
-    return this.http.get<Impresora[]>(this.urlEndPoint);
+  getImpresoras(): Observable<any[]> {
+    return this.http.get<any[]>(this.urlEndPoint);
   }
 
   getMarcas2(): Observable<Marca[]> {
@@ -49,8 +49,8 @@ export class ImpresorasService {
   }
 
   //Captura dato especifico por numero de serie
-  getArea(numeroserie: any): Observable<Impresora>{
-    return this.http.get<Impresora>(`${this.urlEndPoint}/${numeroserie}`).pipe(
+  getArea(numeroserie: any): Observable<any>{
+    return this.http.get<any>(`${this.urlEndPoint}/${numeroserie}`).pipe(
       catchError(e => {
         if(e.status !=401 && e.error.mensaje){
           this.router.navigate(['/impresoras']);

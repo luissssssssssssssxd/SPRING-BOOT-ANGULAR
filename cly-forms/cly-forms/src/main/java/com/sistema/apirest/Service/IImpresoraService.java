@@ -12,9 +12,9 @@ public interface IImpresoraService {
 
 	public Impresora save(Impresora impresora); 
 
-	public void delete(Long numeroserie); 
+	public void delete(String numeroserie); 
 
-	public Impresora findbyid(Long numeroserie);
+	public Impresora findbyid(String numeroserie);
 
 
     

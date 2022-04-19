@@ -27,13 +27,13 @@ public class IImpresoraImpl implements IImpresoraService {
     }
 
     @Override
-    public void delete(Long numeroserie) {
+    public void delete(String numeroserie) {
         iDao.deleteById(numeroserie);  
         
     }
 
     @Override
-    public Impresora findbyid(Long numeroserie) {
+    public Impresora findbyid(String numeroserie) {
         return iDao.findById(numeroserie).orElse(null);
     }
 

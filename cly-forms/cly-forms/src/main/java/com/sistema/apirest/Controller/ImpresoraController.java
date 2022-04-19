@@ -42,7 +42,7 @@ public class ImpresoraController {
 
     @Secured({"ROLE_ADMIN","ROLE_USER"})
     @GetMapping("/impresoras/{numeroserie}")
-    public ResponseEntity<?> show(@PathVariable Long numeroserie){
+    public ResponseEntity<?> show(@PathVariable String numeroserie){
         Impresora impresora = null;
         Map<String, Object> response = new HashMap<>();
 
@@ -113,7 +113,7 @@ public class ImpresoraController {
 
     @Secured({"ROLE_ADMIN"})
 	@PutMapping("/impresoras/{numeroserie}")
-	public ResponseEntity<?> update(@Valid @RequestBody Impresora impresora,BindingResult result, @PathVariable Long numeroserie) {
+	public ResponseEntity<?> update(@Valid @RequestBody Impresora impresora,BindingResult result, @PathVariable String numeroserie) {
 		
 		Impresora datoactual = impresoraService.findbyid(numeroserie);
 		Impresora marcaupd = null;
@@ -151,7 +151,7 @@ public class ImpresoraController {
 		
 		//Si registro buscado en NULO
 		if(datoactual == null) {
-			response.put("mensaje", "Error: no se pudo editar, la impresora col el numero de serie;   ".concat(numeroserie.toString().concat(" No existe en la BD")));
+			response.put("mensaje", "Error: no se pudo editar, la impresora con el numero de serie: ".concat(numeroserie.toString().concat(" No existe en la BD")));
 			return  new  ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 		}
 		try {
@@ -193,7 +193,7 @@ public class ImpresoraController {
 
     @Secured({"ROLE_ADMIN"})
 	@DeleteMapping("/impresoras/{numeroserie}")
-	public ResponseEntity<?> delete(@PathVariable Long numeroserie) {
+	public ResponseEntity<?> delete(@PathVariable String numeroserie) {
 		
 		Map<String, Object> response = new HashMap<>();
 
