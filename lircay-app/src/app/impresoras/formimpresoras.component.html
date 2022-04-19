@@ -16,3 +16,7 @@
     <option *ngFor="let modelo of marcaElegida.modelos" [ngValue]="modelo">{{modelo.modelo}}</option>
   </select>
 </div>
+
+<ng-select2 [data]="exampleData"
+            [width]="300">
+</ng-select2>

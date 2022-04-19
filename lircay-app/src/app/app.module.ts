@@ -39,6 +39,7 @@ import { FormestadoComponent } from './estado/formestado.component';
 import { ImpresorasComponent } from './impresoras/impresoras.component';
 import { FormimpresorasComponent } from './impresoras/formimpresoras.component';
 import { Select2Module } from 'ng-select2-component';
+import { NgSelect2Module } from 'ng-select2';
 
 const routes:Routes =[
   {path:'',redirectTo:'/urgencias',pathMatch:'full'},
@@ -96,6 +97,7 @@ const routes:Routes =[
     MatInputModule,
     NotifierModule,
     MatSortModule,
+    NgSelect2Module,
     RouterModule.forRoot(routes),
     [NgxMaterialTimepickerModule],
      BrowserAnimationsModule,
