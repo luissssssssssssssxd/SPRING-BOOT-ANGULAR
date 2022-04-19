@@ -38,6 +38,7 @@ import { ListadoComponent } from './estado/listado.component';
 import { FormestadoComponent } from './estado/formestado.component';
 import { ImpresorasComponent } from './impresoras/impresoras.component';
 import { FormimpresorasComponent } from './impresoras/formimpresoras.component';
+import { Select2Module } from 'ng-select2-component';
 
 const routes:Routes =[
   {path:'',redirectTo:'/urgencias',pathMatch:'full'},
@@ -80,7 +81,7 @@ const routes:Routes =[
     ListadoComponent,
     FormestadoComponent,
     ImpresorasComponent,
-    FormimpresorasComponent
+    FormimpresorasComponent,
   ],
   imports: [
     BrowserModule,
@@ -110,6 +111,7 @@ const routes:Routes =[
       progressBar:true,
       progressAnimation:'decreasing'
     }),
+    Select2Module
 
   ],
   providers: [UrgenciasService,

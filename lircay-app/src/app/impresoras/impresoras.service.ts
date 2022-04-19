@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { map } from 'jquery';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Marca } from '../marcas/marca';
 import { NotificationService } from '../notification.service';
 import { Impresora } from './impresora';
 
@@ -13,6 +14,7 @@ import { Impresora } from './impresora';
 export class ImpresorasService {
 
   private urlEndPoint: string = "http://localhost:8080/api/impresoras";
+  private urlEndPointMarcas: string = "http://localhost:8080/api/marcas";
 
   constructor(
     private http: HttpClient,
@@ -22,6 +24,10 @@ export class ImpresorasService {
 
   getImpresoras(): Observable<Impresora[]> {
     return this.http.get<Impresora[]>(this.urlEndPoint);
+  }
+
+  getMarcas2(): Observable<Marca[]> {
+    return this.http.get<Marca[]>(this.urlEndPointMarcas);
   }
 
   //Registrar nuevo dato

@@ -1,1 +1,18 @@
-<p>formimpresoras works!</p>
+<div>
+  <label for="Marcas">Marca</label>
+  <select [(ngModel)]="marcaElegida">
+    <option [ngValue]="null">Elige marca</option>
+    <option *ngFor="let marca of marcas" [ngValue]="marca">
+      {{marca.nombre}}
+    </option>
+  </select>
+</div>
+<br>
+<br>
+<div *ngIf="marcaElegida">
+  <label for="Modelo">Modelo</label>
+  <select>
+    <option [ngValue]="null">Elige modelo</option>
+    <option *ngFor="let modelo of marcaElegida.modelos" [ngValue]="modelo">{{modelo.modelo}}</option>
+  </select>
+</div>
