@@ -1,5 +1,6 @@
 package com.sistema.apirest.Controller;
 
+import com.sistema.apirest.Service.IAreaService;
 import com.sistema.apirest.Service.IEstadoService;
 import com.sistema.apirest.Service.IImpresoraService;
 import com.sistema.apirest.Service.IMarcaService;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sistema.apirest.entity.Area;
 import com.sistema.apirest.entity.Estado_imprsora;
 import com.sistema.apirest.entity.Impresora;
 import com.sistema.apirest.entity.Marca;
@@ -43,6 +45,8 @@ public class ImpresoraController {
     private IEstadoService estadoService;
     @Autowired
     private IMarcaService marcaService;
+    @Autowired
+    private IAreaService areaService;
 
     @GetMapping("/impresoras")
     public List<Impresora> listar(){
@@ -56,6 +60,14 @@ public class ImpresoraController {
     @GetMapping("/impresoras-marcas")
     public List<Marca> listarMarcas(){
         return marcaService.getMarcas();
+    }
+    @GetMapping("/impresoras-modelos")
+    public List<Marca> listarModelos(){
+        return marcaService.getMarcas();
+    }
+    @GetMapping("/impresoras-areas")
+    public List<Area> listarAreas(){
+        return areaService.findAll();
     }
 
     @Secured({"ROLE_ADMIN","ROLE_USER"})

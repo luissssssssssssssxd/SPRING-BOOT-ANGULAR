@@ -24,7 +24,33 @@
           <mat-option *ngFor="let estado of estados" [value]="estado">{{estado.estadoimpresora}}</mat-option>
         </mat-select>
       </mat-form-field>
-
+    </div>
+    <div>
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Estado</mat-label>
+        <input type="text" matInput [formControl]="estado"[(ngModel)]="impresora.estado.estadoimpresora"  name="estado" >
+        <mat-error *ngIf="estado.hasError('required')">
+          El numero de serie es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Marca</mat-label>
+        <mat-select [(ngModel)]="impresora.marca" name="marca">
+          <mat-option >Elige Marca</mat-option>
+          <mat-option *ngFor="let marca of marcas" [value]="marca">{{marca.nombre}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Area</mat-label>
+        <mat-select [(ngModel)]="impresora.area" name="area">
+          <mat-option >Elige Marca</mat-option>
+          <mat-option *ngFor="let area of areas" [value]="area">{{area.nombrearea}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <div class="mt-4">
       <mat-form-field appearance="fill">
@@ -38,7 +64,6 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
-
     <div class="form-group row">
       <div class="col-sm-6">
         <button mat-raised-button color="primary" role="button" (click)="create()" *ngIf="!impresora.id; else elseBlock"

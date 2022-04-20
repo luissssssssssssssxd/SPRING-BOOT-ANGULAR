@@ -9,7 +9,7 @@ export class Impresora{
     fecha_mov: Date;
     obs: string;
     area: Area[];
-    estado: Estado[];
+    estado: Estado['estadoimpresora'];
     marca: Marca[];
     modelo: Modelos[];
 }

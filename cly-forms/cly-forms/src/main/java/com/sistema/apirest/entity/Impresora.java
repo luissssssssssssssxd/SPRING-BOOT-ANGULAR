@@ -62,6 +62,9 @@ public class Impresora implements Serializable {
     @JoinColumn(name = "estado_id")
     private Estado_imprsora estado;
 
+
+
+
     public Estado_imprsora getEstado() {
         return estado;
     }
@@ -69,6 +72,10 @@ public class Impresora implements Serializable {
     public void setEstado(Estado_imprsora estado) {
         this.estado = estado;
     }
+
+
+
+
 
     @ManyToOne
     @JoinColumn(name = "modelo_id")

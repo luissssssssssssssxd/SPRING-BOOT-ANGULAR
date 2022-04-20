@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 import { map } from 'jquery';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Area } from '../areas/area';
 import { Estado } from '../estado/estado';
 import { Marca } from '../marcas/marca';
+import { Modelos } from '../marcas/modelos';
 import { NotificationService } from '../notification.service';
 import { Impresora } from './impresora';
 
@@ -17,6 +19,8 @@ export class ImpresorasService {
   private urlEndPoint: string = "http://localhost:8080/api/impresoras";
   private urlEndPointMarcas: string = "http://localhost:8080/api/impresoras-marcas";
   private urlEndPointEstados: string = "http://localhost:8080/api/impresoras-estados";
+  private urlEndPointModelos: string = "http://localhost:8080/api/impresoras-modelos";
+  private urlEndPointAreas: string = "http://localhost:8080/api/impresoras-areas";
 
   constructor(
     private http: HttpClient,
@@ -33,6 +37,12 @@ export class ImpresorasService {
   }
   getEstados(): Observable<Estado[]> {
     return this.http.get<Estado[]>(this.urlEndPointEstados);
+  }
+  getModelos(): Observable<Modelos[]> {
+    return this.http.get<Modelos[]>(this.urlEndPointModelos);
+  }
+  getAreas(): Observable<Area[]> {
+    return this.http.get<Area[]>(this.urlEndPointAreas);
   }
 
   //Registrar nuevo dato

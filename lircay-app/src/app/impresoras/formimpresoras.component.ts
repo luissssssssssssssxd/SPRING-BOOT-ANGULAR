@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Select2Data } from 'ng-select2-component';
 import { map } from 'rxjs/internal/operators/map';
 import Swal from 'sweetalert2';
+import { Area } from '../areas/area';
 import { Estado } from '../estado/estado';
 import { Marca } from '../marcas/marca';
 import { Modelos } from '../marcas/modelos';
@@ -32,9 +33,8 @@ export class FormimpresorasComponent implements OnInit {
   marca = new FormControl('', [Validators.required]);
   modelo = new FormControl('', [Validators.required]);
   marcas: Marca[];
-  marcaElegida: Marca = null;
-  modelos: Modelos[] = [];
   estados: Estado[];
+  areas: Area[];
   public impresora: Impresora = new Impresora();
   public errores: string[];
 
@@ -50,6 +50,7 @@ export class FormimpresorasComponent implements OnInit {
     this.cargardatosImpresora();
     this.cargardatosMarcas();
     this.cargardatosEstados();
+    this.cargardatosAreas();
     // this.cargardatosEstado();
   }
 
@@ -68,6 +69,12 @@ export class FormimpresorasComponent implements OnInit {
   cargardatosEstados(){
     this.impresoraService.getEstados().subscribe((estados) => {
       (this.estados = estados)
+    });
+
+  }
+  cargardatosAreas(){
+    this.impresoraService.getAreas().subscribe((areas) => {
+      (this.areas = areas)
     });
 
   }
