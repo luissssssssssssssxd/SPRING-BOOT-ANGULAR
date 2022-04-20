@@ -148,7 +148,6 @@ public class MarcaController {
 		}
 		try {
 			datoactual.setNombre(marca.getNombre());
-			datoactual.setModelos(marca.getModelos());
 			marcaupd= marcaService.save(datoactual);
 			
 		} catch (DataAccessException e) {

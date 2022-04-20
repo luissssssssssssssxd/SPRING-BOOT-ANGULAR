@@ -58,7 +58,7 @@ const routes:Routes =[
   {path:'areas/form',component:FormareaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'areas/form/:id',component:FormareaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'impresoras/form',component:FormimpresorasComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
-  {path:'impresoras/form/:numeroserie',component:FormimpresorasComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
+  {path:'impresoras/form/:id',component:FormimpresorasComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
 
 
 

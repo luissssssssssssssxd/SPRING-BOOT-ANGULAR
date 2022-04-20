@@ -3,11 +3,16 @@ package com.sistema.apirest.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GeneratorType;
 
 
 @Entity
@@ -15,15 +20,32 @@ import javax.persistence.Table;
 public class Impresora implements Serializable {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique=true)
     private String numeroserie;
 
     private Date fecha_mov;
 
     private String observacion;
 
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+
+
     
     @ManyToOne
-    @JoinColumn(name = "marca")
+    @JoinColumn(name = "marca_id")
     private Marca marca;
     
     public Marca getMarca() {

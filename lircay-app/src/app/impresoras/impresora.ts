@@ -4,7 +4,8 @@ import { Marca } from "../marcas/marca";
 import { Modelos } from "../marcas/modelos";
 
 export class Impresora{
-    numeroserie: any;
+    id:any;
+    numeroserie: string;
     fecha_mov: Date;
     obs: string;
     area: Area[];

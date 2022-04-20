@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface IImpresoraDao extends JpaRepository<Impresora,String> {
+public interface IImpresoraDao extends JpaRepository<Impresora,Long> {
     
 }

@@ -1,5 +1,4 @@
 
-
 <ul class="alert alert-danger" *ngIf="errores?.length>0">
   <li *ngFor="let err of errores">
   {{err}}
@@ -8,23 +7,49 @@
 <div class="container">
   <h2 class="h2">Formulario Impresora</h2>
   <form class="example-form" #formimpresora="ngForm" >
-    <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Numero de serie</mat-label>
-      <input type="text" matInput [formControl]="numeroserie" placeholder=""  [(ngModel)]="impresora.numeroserie" name="numeroserie"
-     >
-      <mat-error *ngIf="numeroserie.hasError('required')">
-        Marca es <strong>requerido</strong>
-      </mat-error>
-    </mat-form-field>
+    <div>
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Numero de serie</mat-label>
+        <input type="text" matInput [formControl]="numeroserie"[(ngModel)]="impresora.numeroserie" name="numeroserie">
+        <mat-error *ngIf="numeroserie.hasError('required')">
+          El numero de serie es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Estado</mat-label>
+        <mat-select [(ngModel)]="impresora.estado" name="estado">
+          <mat-option >Elige Estado</mat-option>
+          <mat-option *ngFor="let estado of estados" [value]="estado">{{estado.estadoimpresora}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    <div class="mt-4">
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha actualizacion</mat-label>
+        <input matInput [matDatepicker]="picker" [formControl]="fecha_mov" [(ngModel)]="impresora.fecha_mov" name="fecha_mov">
+        <mat-error *ngIf="fecha_mov.hasError('required')">
+          La fecha es <strong>requerida</strong>
+        </mat-error>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
 
     <div class="form-group row">
       <div class="col-sm-6">
-        <button mat-raised-button color="primary" role="button" (click)="create()"[disabled]="!formimpresora.form.valid">
+        <button mat-raised-button color="primary" role="button" (click)="create()" *ngIf="!impresora.id; else elseBlock"
+          [disabled]="!formimpresora.form.valid">
           Crear
         </button>
+        <ng-template #elseBlock>
           <button mat-raised-button color="primary" role="button" (click)="update()" [disabled]="!formimpresora.form.valid">
             Editar
           </button>
+        </ng-template>
         <button class="float-right" mat-raised-button color="warn" role="button" [routerLink]="['/impresoras']">
           Volver
         </button>

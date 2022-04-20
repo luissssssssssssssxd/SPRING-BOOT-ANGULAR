@@ -18,7 +18,7 @@ export class ImpresorasComponent implements OnInit {
 
   
 
-  displayedColumns: string[] = ['action', 'Numero de serie', 'Area', 'Estado', 'Marca', 'Modelo', 'Actualizacion'];
+  displayedColumns: string[] = ['action','Id','Numero de serie', 'Area', 'Estado', 'Marca', 'Modelo', 'Actualizacion'];
 
   public dataSource: MatTableDataSource<Impresora>;
 
@@ -79,7 +79,7 @@ export class ImpresorasComponent implements OnInit {
       cancelButtonText: 'No, cancelar',
     }).then((result) => {
       if (result.value) {
-        this.impresoraService.delete(impresora.numeroserie).subscribe((response) => {
+        this.impresoraService.delete(impresora.id).subscribe((response) => {
           this.impresoras = this.impresoras.filter((cli) => cli !== impresora);
           this.cargardatos();
           this.notifyService.showWarning(`Impresora: ${impresora.numeroserie}  eliminada`,"Delete");

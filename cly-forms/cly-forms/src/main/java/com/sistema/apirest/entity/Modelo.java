@@ -22,11 +22,6 @@ public class Modelo implements Serializable {
 
     private String modelo;
 
-    @ManyToOne
-    @JoinColumn(name = "marca_id")
-    @JsonIgnore
-    private Marca marca;
-
     public Long getId() {
         return id;
     }
@@ -41,14 +36,6 @@ public class Modelo implements Serializable {
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
-    }
-
-    public Marca getMarca() {
-        return marca;
-    }
-
-    public void setMarca(Marca marca) {
-        this.marca = marca;
     }
 
     

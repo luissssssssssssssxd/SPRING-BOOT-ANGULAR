@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { map } from 'jquery';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Estado } from '../estado/estado';
 import { Marca } from '../marcas/marca';
 import { NotificationService } from '../notification.service';
 import { Impresora } from './impresora';
@@ -14,7 +15,8 @@ import { Impresora } from './impresora';
 export class ImpresorasService {
 
   private urlEndPoint: string = "http://localhost:8080/api/impresoras";
-  private urlEndPointMarcas: string = "http://localhost:8080/api/marcas";
+  private urlEndPointMarcas: string = "http://localhost:8080/api/impresoras-marcas";
+  private urlEndPointEstados: string = "http://localhost:8080/api/impresoras-estados";
 
   constructor(
     private http: HttpClient,
@@ -22,12 +24,15 @@ export class ImpresorasService {
     private notifyService: NotificationService
   ) { }
 
-  getImpresoras(): Observable<any[]> {
-    return this.http.get<any[]>(this.urlEndPoint);
+  getImpresoras(): Observable<Impresora[]> {
+    return this.http.get<Impresora[]>(this.urlEndPoint);
   }
 
   getMarcas2(): Observable<Marca[]> {
     return this.http.get<Marca[]>(this.urlEndPointMarcas);
+  }
+  getEstados(): Observable<Estado[]> {
+    return this.http.get<Estado[]>(this.urlEndPointEstados);
   }
 
   //Registrar nuevo dato
@@ -48,9 +53,9 @@ export class ImpresorasService {
     );
   }
 
-  //Captura dato especifico por numero de serie
-  getArea(numeroserie: any): Observable<any>{
-    return this.http.get<any>(`${this.urlEndPoint}/${numeroserie}`).pipe(
+  //Captura dato especifico por id
+  getImpresora(id: any): Observable<Impresora>{
+    return this.http.get<Impresora>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e => {
         if(e.status !=401 && e.error.mensaje){
           this.router.navigate(['/impresoras']);
@@ -62,7 +67,7 @@ export class ImpresorasService {
 
   //Update impresora
   update(impresora:Impresora):Observable<any>{
-    return this.http.put<any>(`${this.urlEndPoint}/${impresora.numeroserie}`,impresora).pipe(
+    return this.http.put<any>(`${this.urlEndPoint}/${impresora.id}`,impresora).pipe(
       catchError(e => {
 
 
@@ -77,9 +82,9 @@ export class ImpresorasService {
     )
   }
 
-  //Elimina una area
-  delete(numeroserie:any):Observable<Impresora>{
-    return this.http.delete<Impresora>(`${this.urlEndPoint}/${numeroserie}`).pipe(
+  //Elimina una impresora
+  delete(id:any):Observable<Impresora>{
+    return this.http.delete<Impresora>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e => {
 
 

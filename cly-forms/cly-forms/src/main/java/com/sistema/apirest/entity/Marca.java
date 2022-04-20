@@ -23,8 +23,7 @@ public class Marca implements Serializable {
 
     private String nombre;
 
-    @OneToMany(mappedBy = "marca",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
-    private List<Modelo> modelos = new ArrayList<>();
+
 
     public Long getId() {
         return id;
@@ -42,13 +41,6 @@ public class Marca implements Serializable {
         this.nombre = nombre;
     }
 
-    public List<Modelo> getModelos() {
-        return modelos;
-    }
-
-    public void setModelos(List<Modelo> modelos) {
-        this.modelos = modelos;
-    }
 
     
     
