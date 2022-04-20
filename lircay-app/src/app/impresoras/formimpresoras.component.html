@@ -28,7 +28,7 @@
     <div>
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Estado</mat-label>
-        <input type="text" matInput [formControl]="estado"[(ngModel)]="impresora.estado.estadoimpresora"  name="estado" >
+        <input type="text" matInput [formControl]="estado"[(ngModel)]="impresora.estado"  name="estado" >
         <mat-error *ngIf="estado.hasError('required')">
           El numero de serie es <strong>requerido</strong>
         </mat-error>
