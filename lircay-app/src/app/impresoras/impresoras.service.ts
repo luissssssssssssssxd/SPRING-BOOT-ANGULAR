@@ -17,11 +17,6 @@ import { Impresora } from './impresora';
 export class ImpresorasService {
 
   private urlEndPoint: string = "http://localhost:8080/api/impresoras";
-  private urlEndPointMarcas: string = "http://localhost:8080/api/impresoras-marcas";
-  private urlEndPointEstados: string = "http://localhost:8080/api/impresoras-estados";
-  private urlEndPointModelos: string = "http://localhost:8080/api/impresoras-modelos";
-  private urlEndPointAreas: string = "http://localhost:8080/api/impresoras-areas";
-
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -32,17 +27,17 @@ export class ImpresorasService {
     return this.http.get<Impresora[]>(this.urlEndPoint);
   }
 
-  getMarcas2(): Observable<Marca[]> {
-    return this.http.get<Marca[]>(this.urlEndPointMarcas);
+  getMarcas2(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.urlEndPoint}/${'impresoras-marcas'}`);
   }
-  getEstados(): Observable<Estado[]> {
-    return this.http.get<Estado[]>(this.urlEndPointEstados);
+  getEstados(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.urlEndPoint}/${'impresoras-estados'}`);
   }
-  getModelos(): Observable<Modelos[]> {
-    return this.http.get<Modelos[]>(this.urlEndPointModelos);
+  getModelos(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.urlEndPoint}/${'impresoras-modelos'}`);
   }
-  getAreas(): Observable<Area[]> {
-    return this.http.get<Area[]>(this.urlEndPointAreas);
+  getAreas(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.urlEndPoint}/${'impresoras-areas'}`);
   }
 
   //Registrar nuevo dato
@@ -64,8 +59,8 @@ export class ImpresorasService {
   }
 
   //Captura dato especifico por id
-  getImpresora(id: any): Observable<Impresora>{
-    return this.http.get<Impresora>(`${this.urlEndPoint}/${id}`).pipe(
+  getImpresora(id: any): Observable<any>{
+    return this.http.get<any>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e => {
         if(e.status !=401 && e.error.mensaje){
           this.router.navigate(['/impresoras']);
@@ -112,7 +107,7 @@ export class ImpresorasService {
 
 
 
-  
+
 }
 
 

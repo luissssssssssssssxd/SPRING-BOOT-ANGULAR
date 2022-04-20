@@ -53,19 +53,19 @@ public class ImpresoraController {
         return impresoraService.findAll();
     }
 
-    @GetMapping("/impresoras-estados")
+    @GetMapping("/impresoras/impresoras-estados")
     public List<Estado_imprsora> listarEstados(){
         return estadoService.findAll();
     }
-    @GetMapping("/impresoras-marcas")
+    @GetMapping("/impresoras/impresoras-marcas")
     public List<Marca> listarMarcas(){
         return marcaService.getMarcas();
     }
-    @GetMapping("/impresoras-modelos")
+    @GetMapping("/impresoras/impresoras-modelos")
     public List<Marca> listarModelos(){
         return marcaService.getMarcas();
     }
-    @GetMapping("/impresoras-areas")
+    @GetMapping("/impresoras/impresoras-areas")
     public List<Area> listarAreas(){
         return areaService.findAll();
     }

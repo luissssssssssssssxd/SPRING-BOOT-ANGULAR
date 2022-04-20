@@ -15,16 +15,10 @@ import { ImpresorasService } from './impresoras.service';
 @Component({
   selector: 'app-formimpresoras',
   templateUrl: './formimpresoras.component.html',
-  styleUrls: ['./formimpresoras.component.css']
+  styleUrls: ['./formimpresoras.component.css'],
 })
-
-
-
-
 export class FormimpresorasComponent implements OnInit {
-
   public exampleData: Select2Data;
-
   numeroserie = new FormControl('', [Validators.required]);
   fecha_mov = new FormControl('', [Validators.required]);
   obs = new FormControl('', [Validators.required]);
@@ -38,13 +32,12 @@ export class FormimpresorasComponent implements OnInit {
   public impresora: Impresora = new Impresora();
   public errores: string[];
 
-
   constructor(
     private impresoraService: ImpresorasService,
-    private notifyService : NotificationService,
+    private notifyService: NotificationService,
     public router: Router,
-    public activatedroute: ActivatedRoute,
-  ) { }
+    public activatedroute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.cargardatosImpresora();
@@ -54,29 +47,25 @@ export class FormimpresorasComponent implements OnInit {
     // this.cargardatosEstado();
   }
 
-  cargardatosMarcas(){
+  cargardatosMarcas() {
     Swal.fire({
       title: 'Cargando datos',
-
     });
     Swal.showLoading();
     this.impresoraService.getMarcas2().subscribe((marcas) => {
-      (this.marcas = marcas),
-      Swal.close();
+      (this.marcas = marcas), Swal.close();
     });
   }
 
-  cargardatosEstados(){
+  cargardatosEstados() {
     this.impresoraService.getEstados().subscribe((estados) => {
-      (this.estados = estados)
+      this.estados = estados;
     });
-
   }
-  cargardatosAreas(){
+  cargardatosAreas() {
     this.impresoraService.getAreas().subscribe((areas) => {
-      (this.areas = areas)
+      this.areas = areas;
     });
-
   }
   // cargardatosEstado(){
   //   this.impresoraService.getEstados().pipe(
@@ -89,23 +78,31 @@ export class FormimpresorasComponent implements OnInit {
 
   // }
 
-
-  cargardatosImpresora(){
-    this.activatedroute.params.subscribe(params  => {
-
-      let id = params ['id']
-      if(id){
-        this.impresoraService.getImpresora(id).subscribe((impresora) =>{
+  cargardatosImpresora() {
+    this.activatedroute.params.subscribe((params) => {
+      let id = params['id'];
+      if (id) {
+        this.impresoraService.getImpresora(id).subscribe((impresora) => {
           this.impresora = impresora;
-        })
+        });
       }
-    })
+    });
+    this.impresoraService.getEstados().subscribe(estados => this.estados = estados);
+    console.log(this.estados);
+
   }
 
+  compararRegion(o1: Estado, o2: Estado): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.id === o2.id;
+  }
   public create(): void {
     this.impresoraService.create(this.impresora).subscribe(
       (json) => {
-        this.notifyService.showSuccess("Registro creado con exito!","OK");
+        this.notifyService.showSuccess('Registro creado con exito!', 'OK');
         this.router.navigate(['/impresoras']);
       },
       (err) => {
@@ -120,7 +117,10 @@ export class FormimpresorasComponent implements OnInit {
     this.impresoraService.update(this.impresora).subscribe(
       (json) => {
         this.router.navigate(['/impresoras']);
-        this.notifyService.showSuccess( `La impresora se ha actualizado correctamente`,"OK");
+        this.notifyService.showSuccess(
+          `La impresora se ha actualizado correctamente`,
+          'OK'
+        );
       },
       (err) => {
         this.errores = err.error.errors as string[];
@@ -129,5 +129,4 @@ export class FormimpresorasComponent implements OnInit {
       }
     );
   }
-
 }
