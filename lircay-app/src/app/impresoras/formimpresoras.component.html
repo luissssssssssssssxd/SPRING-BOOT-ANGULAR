@@ -26,22 +26,11 @@
         </mat-select>
       </mat-form-field>
     </div>
-
-   <!--  <div class="form-group row">
-      <label for="region" class="col-form-label col-sm-2">Estado</label>
-      <div class="col-sm-6">
-        <select [compareWith]="compararRegion" class="form-control" [(ngModel)]="impresora.estado" name="estado" style="width:500px;">
-          <option [ngValue]="undefined">--- selecionar un Estado ---</option>
-          <option *ngFor="let estado of estados" [ngValue]="estado">{{estado.estadoimpresora}}</option>
-        </select>
-      </div>
-    </div> -->
-
     <div>
       <mat-form-field appearance="standard">
         <mat-label>Marca</mat-label>
-        <mat-select [(ngModel)]="impresora.marca" name="marca">
-          <mat-option >Elige Marca</mat-option>
+        <mat-select  [compareWith]="compararMarca" [(ngModel)]="impresora.marca" name="marca">
+          <mat-option [value]="undefined" >Elige Marca</mat-option>
           <mat-option *ngFor="let marca of marcas" [value]="marca">{{marca.nombre}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -49,24 +38,14 @@
     <div>
       <mat-form-field appearance="standard">
         <mat-label>Area</mat-label>
-        <mat-select [(ngModel)]="impresora.area" name="area">
-          <mat-option >Elige Marca</mat-option>
+        <mat-select  [compareWith]="compararArea" [(ngModel)]="impresora.area" name="area">
+          <mat-option [value]="undefined" >Elige Area</mat-option>
           <mat-option *ngFor="let area of areas" [value]="area">{{area.nombrearea}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="mt-4">
-      <mat-form-field appearance="standard">
-        <mat-label>Fecha actualizacion</mat-label>
-        <input matInput [matDatepicker]="picker" [formControl]="fecha_mov" [(ngModel)]="impresora.fecha_mov" name="fecha_mov">
-        <mat-error *ngIf="fecha_mov.hasError('required')">
-          La fecha es <strong>requerida</strong>
-        </mat-error>
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
+
+
     <div class="form-group row">
       <div class="col-sm-6">
         <button mat-raised-button color="primary" role="button" (click)="create()" *ngIf="!impresora.id; else elseBlock"

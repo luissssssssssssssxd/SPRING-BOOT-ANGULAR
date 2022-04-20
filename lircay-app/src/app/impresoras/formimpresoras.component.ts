@@ -88,11 +88,29 @@ export class FormimpresorasComponent implements OnInit {
       }
     });
     this.impresoraService.getEstados().subscribe(estados => this.estados = estados);
+    this.impresoraService.getMarcas2().subscribe(marcas => this.marcas = marcas);
+    this.impresoraService.getAreas().subscribe(areas => this.areas = areas);
+
     console.log(this.estados);
 
   }
 
   compararRegion(o1: Estado, o2: Estado): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.id === o2.id;
+  }
+  compararMarca(o1: Marca, o2: Marca): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.id === o2.id;
+  }
+
+  compararArea(o1: Area, o2: Area): boolean {
     if (o1 === undefined && o2 === undefined) {
       return true;
     }

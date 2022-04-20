@@ -193,8 +193,6 @@ public class ImpresoraController {
 			modeloupd = impresoraService.save(datoactual);
 			datoactual.setNumeroserie(impresora.getNumeroserie());
 			numero_serieupd = impresoraService.save(datoactual);
-			datoactual.setfecha_mov(impresora.getfecha_mov());
-			fecha_movupd = impresoraService.save(datoactual);
 			datoactual.setObservacion(impresora.getObservacion());
 			obsupd = impresoraService.save(datoactual);
 			datoactual.setArea(impresora.getArea());
@@ -212,7 +210,6 @@ public class ImpresoraController {
 		response.put("area", areaupd);
 		response.put("modelo", modeloupd);
 		response.put("observacion", obsupd);
-		response.put("fecha_movimiento", fecha_movupd);
 		response.put("Numero de serie", numero_serieupd);
 		response.put("estado", estadoupd);
 			

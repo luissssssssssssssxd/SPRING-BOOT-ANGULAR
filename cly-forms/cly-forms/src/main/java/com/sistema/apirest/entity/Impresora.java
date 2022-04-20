@@ -11,8 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.GeneratorType;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.PrePersist;
 
 
 @Entity
@@ -25,10 +29,16 @@ public class Impresora implements Serializable {
 
     @Column(unique=true)
     private String numeroserie;
-
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha_mov;
 
     private String observacion;
+
+    @PrePersist /* Metodo para insertar la fecha automaticamente */
+    public void PrePersist() {
+        fecha_mov = new Date();
+    }
 
 
 
