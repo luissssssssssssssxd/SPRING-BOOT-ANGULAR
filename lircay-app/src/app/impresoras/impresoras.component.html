@@ -56,6 +56,11 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Modelo</th>
         <td mat-cell *matCellDef="let impresora">{{ impresora.modelo.modelo }}</td>
       </ng-container>
+      <ng-container matColumnDef="Observacion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Observacion</th>
+        <td mat-cell *matCellDef="let impresora"   >{{impresora.observacion}}
+        </td>
+      </ng-container>
       <ng-container matColumnDef="Actualizacion">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Ultima modificacion</th>
         <td mat-cell *matCellDef="let impresora"   >{{impresora.fecha_mov | date:'dd/MM/yyyy HH:mm:ss'}}

@@ -7,7 +7,7 @@ export class Impresora{
     id:any;
     numeroserie: string;
     fecha_mov: Date;
-    obs: string;
+    observacion: string;
     area: Area[];
     estado: Estado[];
     marca: Marca[];

@@ -18,7 +18,7 @@ export class ImpresorasComponent implements OnInit {
 
   
 
-  displayedColumns: string[] = ['action','Id','Numero de serie', 'Area', 'Estado', 'Marca', 'Modelo', 'Actualizacion'];
+  displayedColumns: string[] = ['action','Id','Numero de serie', 'Area', 'Estado', 'Marca', 'Modelo', 'Actualizacion', 'Observacion'];
 
   public dataSource: MatTableDataSource<Impresora>;
 

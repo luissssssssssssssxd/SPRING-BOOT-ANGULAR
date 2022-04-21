@@ -56,7 +56,7 @@ export class ImpresorasService {
 
         }
         console.error(e.error.mensaje);
-        Swal.fire('Error',`Error BD ${e.error.mensaje}  `,'error');
+        Swal.fire('Error',`La impresora ya está ingresada`,'error');
 
         return throwError(e);
       })
