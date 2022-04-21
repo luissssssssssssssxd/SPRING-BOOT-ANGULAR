@@ -6,44 +6,40 @@ import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';
 import { NotificationService } from '../notification.service';
 import { AuthService } from '../usuarios/auth.service';
-import { Impresora } from './impresora';
-import { ImpresorasService } from './impresoras.service';
+import { Incidencia } from './incidencia';
+import { IncidenciasService } from './incidencias.service';
 
 @Component({
-  selector: 'app-impresoras',
-  templateUrl: './impresoras.component.html',
-  styleUrls: ['./impresoras.component.css']
+  selector: 'app-incidencias',
+  templateUrl: './incidencias.component.html',
+  styleUrls: ['./incidencias.component.css']
 })
-export class ImpresorasComponent implements OnInit {
+export class IncidenciasComponent implements OnInit {
 
-  displayedColumns: string[] = ['action','Id','Numero de serie', 'Area', 'Estado', 'Marca', 'Modelo', 'Actualizacion', 'Observacion'];
+  displayedColumns: string[] = ['ID','Action','numeroserie','Area','Estado','Marca', 'Modelo','Observaciones'];
 
-  public dataSource: MatTableDataSource<Impresora>;
+  public dataSource: MatTableDataSource<Incidencia>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   private dataArray: any;
 
-  impresoras:Impresora[];
+  incidencias:Incidencia[];
   // impresoraElegida:Impresora = null;
   filterpost = ''
 
-
   constructor(
-    public impresoraService:ImpresorasService,
+    public incidenciaService:IncidenciasService,
     public authservice: AuthService,
     private http:HttpClient,
     private notifyService : NotificationService
-    ) { }
+  ) { }
 
-    applyFilter(event: Event) {
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.dataSource.filter = filterValue.trim().toLowerCase();
-    }
-
-   
-
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   ngOnInit(): void {
     this.cargardatos();
@@ -55,32 +51,32 @@ export class ImpresorasComponent implements OnInit {
 
     });
     Swal.showLoading();
-    this.impresoraService.getImpresoras().subscribe((impresoras) => {
-      (this.impresoras = impresoras),
-       console.log(this.impresoras);
-      this.dataArray = impresoras;
-      this.dataSource = new MatTableDataSource<Impresora>(this.dataArray);
+    this.incidenciaService.getIncidencias().subscribe((incidencias) => {
+      (this.incidencias = incidencias),
+       console.log(this.incidencias);
+      this.dataArray = incidencias;
+      this.dataSource = new MatTableDataSource<Incidencia>(this.dataArray);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       Swal.close();
-      console.log(impresoras);
+      console.log(incidencias);
     });
   }
 
-  delete(impresora: Impresora): void {
+  delete(incidencia: Incidencia): void {
     Swal.fire({
       title: 'Estas seguro?',
-      text: `¿Seguro que desea eliminar la impresora:  ${impresora.numeroserie}?`,
+      text: `¿Seguro que desea eliminar la incidencia:  ${incidencia.id}?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si,eliminar!',
       cancelButtonText: 'No, cancelar',
     }).then((result) => {
       if (result.value) {
-        this.impresoraService.delete(impresora.id).subscribe((response) => {
-          this.impresoras = this.impresoras.filter((cli) => cli !== impresora);
+        this.incidenciaService.delete(incidencia.id).subscribe((response) => {
+          this.incidencias = this.incidencias.filter((cli) => cli !== incidencia);
           this.cargardatos();
-          this.notifyService.showWarning(`Impresora: ${impresora.numeroserie}  eliminada`,"Delete");
+          this.notifyService.showWarning(`Incidencia: ${incidencia.id}  eliminada`,"Delete");
         });
 
       }

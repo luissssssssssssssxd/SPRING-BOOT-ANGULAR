@@ -44,6 +44,9 @@ import localeCl from '@angular/common/locales/es-CL';
 registerLocaleData(localeCl);
 import { ModelosComponent } from './modelos/modelos.component';
 import { FormmodeloComponent } from './modelos/formmodelo.component';
+import { IncidenciasComponent } from './incidencias/incidencias.component';
+import { FormincidenciasComponent } from './incidencias/formincidencias.component';
+import { ObsIncidenciasComponent } from './obs-incidencias/obs-incidencias.component';
 
 const routes:Routes =[
   {path:'',redirectTo:'/impresoras',pathMatch:'full'},
@@ -53,6 +56,8 @@ const routes:Routes =[
   {path:'estados',component:ListadoComponent},
   {path:'impresoras',component:ImpresorasComponent},
   {path:'modelos',component:ModelosComponent},
+  {path:'incidencias',component:IncidenciasComponent},
+  {path:'obs_incidencias',component:ObsIncidenciasComponent},
   {path:'estados/form/:id',component:FormestadoComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'estados/form',component:FormestadoComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'marcas/form',component:FormmarcaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
@@ -66,6 +71,8 @@ const routes:Routes =[
   {path:'impresoras/form/:id',component:FormimpresorasComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'modelos/form',component:FormmodeloComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'modelos/form/:id',component:FormmodeloComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
+  {path:'incidencias/form',component:FormincidenciasComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
+  {path:'incidencias/form/:id',component:FormincidenciasComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
 
 
 
@@ -91,7 +98,9 @@ const routes:Routes =[
     ImpresorasComponent,
     FormimpresorasComponent,
     ModelosComponent,
-    FormmodeloComponent
+    FormmodeloComponent,
+    IncidenciasComponent,
+    FormincidenciasComponent
   ],
   imports: [
     BrowserModule,
