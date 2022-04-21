@@ -7,7 +7,6 @@ import Swal from 'sweetalert2';
 import { Area } from '../areas/area';
 import { Estado } from '../estado/estado';
 import { Marca } from '../marcas/marca';
-import { Modelos } from '../marcas/modelos';
 import { Modelo } from '../modelo/modelo';
 import { NotificationService } from '../notification.service';
 import { Impresora } from './impresora';
@@ -70,6 +69,11 @@ export class FormimpresorasComponent implements OnInit {
       this.areas = areas;
     });
   }
+  cargardatosmMdelos() {
+    this.impresoraService.getModelos().subscribe((modelos) => {
+      this.modelos = modelos;
+    });
+  }
   // cargardatosEstado(){
   //   this.impresoraService.getEstados().pipe(
   //     map((estado: Estado[]) => estado.map((estado: Estado) => ({label: estado.estadoimpresora, value: estado.id})))
@@ -98,14 +102,7 @@ export class FormimpresorasComponent implements OnInit {
 
   }
 
-  compararModelo(o1: Modelo, o2: Modelo): boolean {
-    if (o1 === undefined && o2 === undefined) {
-      return true;
-    }
 
-    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.id === o2.id;
-  }
-  com
   compararRegion(o1: Estado, o2: Estado): boolean {
     if (o1 === undefined && o2 === undefined) {
       return true;
@@ -122,6 +119,13 @@ export class FormimpresorasComponent implements OnInit {
   }
 
   compararArea(o1: Area, o2: Area): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.id === o2.id;
+  }
+  compararModelo(o1: Modelos, o2: Modelos): boolean {
     if (o1 === undefined && o2 === undefined) {
       return true;
     }

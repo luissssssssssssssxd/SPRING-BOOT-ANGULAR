@@ -1,4 +1,3 @@
-import { Modelos } from "./modelos";
 
 export class Marca {
 
