@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import { Area } from '../areas/area';
 import { Estado } from '../estado/estado';
 import { Marca } from '../marcas/marca';
-import { Modelos } from '../marcas/modelos';
+import { Modelos } from '../modelos/modelos';
 import { NotificationService } from '../notification.service';
 import { Impresora } from './impresora';
 import { ImpresorasService } from './impresoras.service';
@@ -29,6 +29,7 @@ export class FormimpresorasComponent implements OnInit {
   marcas: Marca[];
   estados: Estado[];
   areas: Area[];
+  modelos: Modelos[];
   public impresora: Impresora = new Impresora();
   public errores: string[];
 
@@ -67,6 +68,11 @@ export class FormimpresorasComponent implements OnInit {
       this.areas = areas;
     });
   }
+  cargardatosmMdelos() {
+    this.impresoraService.getModelos().subscribe((modelos) => {
+      this.modelos = modelos;
+    });
+  }
   // cargardatosEstado(){
   //   this.impresoraService.getEstados().pipe(
   //     map((estado: Estado[]) => estado.map((estado: Estado) => ({label: estado.estadoimpresora, value: estado.id})))
@@ -90,6 +96,7 @@ export class FormimpresorasComponent implements OnInit {
     this.impresoraService.getEstados().subscribe(estados => this.estados = estados);
     this.impresoraService.getMarcas2().subscribe(marcas => this.marcas = marcas);
     this.impresoraService.getAreas().subscribe(areas => this.areas = areas);
+    this.impresoraService.getModelos().subscribe(modelos => this.modelos = modelos);
 
     console.log(this.estados);
 
@@ -111,6 +118,13 @@ export class FormimpresorasComponent implements OnInit {
   }
 
   compararArea(o1: Area, o2: Area): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.id === o2.id;
+  }
+  compararModelo(o1: Modelos, o2: Modelos): boolean {
     if (o1 === undefined && o2 === undefined) {
       return true;
     }

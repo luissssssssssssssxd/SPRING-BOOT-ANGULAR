@@ -45,7 +45,9 @@ export class FormestadoComponent implements OnInit {
   public create():void{
     this.estadoservice.create(this.estado).subscribe(json=>{
       this.router.navigate(['/estados']);
-      this.notifyService.showSuccess("Registro creado con exito!","OK");
+      this.notifyService.showSuccess(`Estado: ${json.estado.estadoimpresora} creado correctamente`,"OK");
+
+      console.log()
     })
     return;
   }

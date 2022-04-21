@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { Area } from '../areas/area';
 import { Estado } from '../estado/estado';
 import { Marca } from '../marcas/marca';
-import { Modelos } from '../marcas/modelos';
+import { Modelos } from '../modelos/modelos';
 import { NotificationService } from '../notification.service';
 import { Impresora } from './impresora';
 

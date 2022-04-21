@@ -40,6 +40,8 @@ import { ImpresorasComponent } from './impresoras/impresoras.component';
 import { FormimpresorasComponent } from './impresoras/formimpresoras.component';
 import { Select2Module } from 'ng-select2-component';
 import { NgSelect2Module } from 'ng-select2';
+import { ModelosComponent } from './modelos/modelos.component';
+import { FormmodeloComponent } from './modelos/formmodelo.component';
 
 const routes:Routes =[
   {path:'',redirectTo:'/urgencias',pathMatch:'full'},
@@ -48,6 +50,7 @@ const routes:Routes =[
   {path:'marcas',component:MarcaComponent},
   {path:'estados',component:ListadoComponent},
   {path:'impresoras',component:ImpresorasComponent},
+  {path:'modelos',component:ModelosComponent},
   {path:'estados/form/:id',component:FormestadoComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'estados/form',component:FormestadoComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'marcas/form',component:FormmarcaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
@@ -59,6 +62,8 @@ const routes:Routes =[
   {path:'areas/form/:id',component:FormareaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'impresoras/form',component:FormimpresorasComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'impresoras/form/:id',component:FormimpresorasComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
+  {path:'modelos/form',component:FormmodeloComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
+  {path:'modelos/form/:id',component:FormmodeloComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
 
 
 
@@ -83,6 +88,8 @@ const routes:Routes =[
     FormestadoComponent,
     ImpresorasComponent,
     FormimpresorasComponent,
+    ModelosComponent,
+    FormmodeloComponent
   ],
   imports: [
     BrowserModule,

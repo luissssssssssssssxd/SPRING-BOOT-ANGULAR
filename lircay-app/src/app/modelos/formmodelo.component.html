@@ -1,0 +1,39 @@
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+    <li *ngFor="let err of errores">
+      {{ err }}
+    </li>
+  </ul>
+  
+  
+  <div class="container ">
+    <h2 class="h2">Formulario Modelos</h2>
+    <form class="example-form" #formmodelo="ngForm" >
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Modelo Impresora</mat-label>
+        <input type="text" matInput [formControl]="modelos" placeholder=""  [(ngModel)]="modelo.modelo" name="modelo"
+       >
+        <mat-error *ngIf="modelos.hasError('required')">
+          modelo es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+  
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button mat-raised-button color="primary" role="button" (click)="create()" *ngIf="!modelo.id; else elseBlock"
+            [disabled]="!formmodelo.form.valid">
+            Crear
+          </button>
+          <ng-template #elseBlock>
+            <button mat-raised-button color="primary" role="button" (click)="update()" [disabled]="!formmodelo.form.valid">
+              Editar
+            </button>
+          </ng-template>
+          <button class="float-right" mat-raised-button color="warn" role="button" [routerLink]="['/modelos']">
+            Volver
+          </button>
+        </div>
+      </div>
+    </form>
+  
+  </div>
+  

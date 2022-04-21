@@ -44,6 +44,15 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <div>
+      <mat-form-field appearance="standard">
+        <mat-label>Modelo</mat-label>
+        <mat-select  [compareWith]="compararModelo" [(ngModel)]="impresora.modelo" name="area">
+          <mat-option [value]="undefined" >Elige Modelo</mat-option>
+          <mat-option *ngFor="let modelo of modelos" [value]="modelo">{{modelo.modelo}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
 
     <div class="form-group row">
