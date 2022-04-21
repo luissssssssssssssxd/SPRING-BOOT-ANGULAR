@@ -31,7 +31,7 @@ import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { ToastrModule } from 'ngx-toastr';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { CommonModule } from "@angular/common";
+import { CommonModule, registerLocaleData } from "@angular/common";
 import { BrowserModule } from '@angular/platform-browser';
 import { MatSortModule } from '@angular/material/sort';
 import { ListadoComponent } from './estado/listado.component';
@@ -40,9 +40,11 @@ import { ImpresorasComponent } from './impresoras/impresoras.component';
 import { FormimpresorasComponent } from './impresoras/formimpresoras.component';
 import { Select2Module } from 'ng-select2-component';
 import { NgSelect2Module } from 'ng-select2';
+import localeCl from '@angular/common/locales/es-CL';
+registerLocaleData(localeCl);
 
 const routes:Routes =[
-  {path:'',redirectTo:'/urgencias',pathMatch:'full'},
+  {path:'',redirectTo:'/impresoras',pathMatch:'full'},
   {path:'urgencias',component:UrgenciasComponent},
   {path:'areas',component:AreaComponent},
   {path:'marcas',component:MarcaComponent},
@@ -117,7 +119,7 @@ const routes:Routes =[
 
   ],
   providers: [UrgenciasService,
-    {provide:LOCALE_ID,useValue:'es'},
+    {provide:LOCALE_ID,useValue:'es-CL'},
     {provide: HTTP_INTERCEPTORS,useClass:TokenInterceptor,multi:true},
       {provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
 

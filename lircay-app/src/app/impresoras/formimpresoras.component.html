@@ -6,11 +6,11 @@
 </ul>
 <div class="container">
   <h2 class="h2">Formulario Impresora</h2>
-  <form class="example-form" #formimpresora="ngForm" >
+  <form  class="example-form" #formimpresora="ngForm"   >
     <div>
-      <mat-form-field class="example-full-width" appearance="outline">
+      <mat-form-field class="example-full-width" appearance="standard">
         <mat-label>Numero de serie</mat-label>
-        <input type="text" matInput [formControl]="numeroserie"[(ngModel)]="impresora.numeroserie" name="numeroserie">
+        <input type="text" matInput [formControl]="numeroserie" [(ngModel)]="impresora.numeroserie" name="numeroserie" required >
         <mat-error *ngIf="numeroserie.hasError('required')">
           El numero de serie es <strong>requerido</strong>
         </mat-error>
@@ -44,7 +44,15 @@
         </mat-select>
       </mat-form-field>
     </div>
-
+    <div>
+      <mat-form-field appearance="standard">
+        <mat-label>Modelo</mat-label>
+        <mat-select  [compareWith]="compararModelo" [(ngModel)]="impresora.modelo" name="modelo">
+          <mat-option [value]="undefined" >Elige Modelo</mat-option>
+          <mat-option *ngFor="let modelo of modelos" [value]="modelo">{{modelo.modelo}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
     <div class="form-group row">
       <div class="col-sm-6">

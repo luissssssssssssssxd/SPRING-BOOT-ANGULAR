@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { map } from 'jquery';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 import { Area } from '../areas/area';
 import { Estado } from '../estado/estado';
 import { Marca } from '../marcas/marca';
@@ -46,13 +47,17 @@ export class ImpresorasService {
       catchError(e => {
 
         if(e.status ==400){
+          Swal.fire('Error',`Error BD ${e.status}  `,'error');
           return throwError(e);
         }
         if(e.error.mensaje){
           console.error(e.error.mensaje);
-        }
+          Swal.fire('Error',`Error BD ${e.error.mensaje}  `,'error');
 
+        }
         console.error(e.error.mensaje);
+        Swal.fire('Error',`Error BD ${e.error.mensaje}  `,'error');
+
         return throwError(e);
       })
     );

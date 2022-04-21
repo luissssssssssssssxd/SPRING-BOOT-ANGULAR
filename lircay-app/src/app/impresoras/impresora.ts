@@ -1,7 +1,7 @@
 import { Area } from "../areas/area";
 import { Estado } from "../estado/estado";
 import { Marca } from "../marcas/marca";
-import { Modelos } from "../marcas/modelos";
+import { Modelo } from "../modelo/modelo";
 
 export class Impresora{
     id:any;
@@ -11,5 +11,5 @@ export class Impresora{
     area: Area[];
     estado: Estado[];
     marca: Marca[];
-    modelo: Modelos[];
+    modelo: Modelo[];
 }

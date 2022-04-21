@@ -29,8 +29,8 @@ public class Impresora implements Serializable {
 
     @Column(unique=true)
     private String numeroserie;
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date fecha_mov;
 
     private String observacion;

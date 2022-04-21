@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select2Data } from 'ng-select2-component';
 import { map } from 'rxjs/internal/operators/map';
@@ -8,6 +8,7 @@ import { Area } from '../areas/area';
 import { Estado } from '../estado/estado';
 import { Marca } from '../marcas/marca';
 import { Modelos } from '../marcas/modelos';
+import { Modelo } from '../modelo/modelo';
 import { NotificationService } from '../notification.service';
 import { Impresora } from './impresora';
 import { ImpresorasService } from './impresoras.service';
@@ -19,7 +20,8 @@ import { ImpresorasService } from './impresoras.service';
 })
 export class FormimpresorasComponent implements OnInit {
   public exampleData: Select2Data;
-  numeroserie = new FormControl('', [Validators.required]);
+
+  numeroserie = new FormControl('', [Validators.required,Validators.minLength(2)]);
   fecha_mov = new FormControl('', [Validators.required]);
   obs = new FormControl('', [Validators.required]);
   area = new FormControl('', [Validators.required]);
@@ -29,6 +31,7 @@ export class FormimpresorasComponent implements OnInit {
   marcas: Marca[];
   estados: Estado[];
   areas: Area[];
+  modelos: Modelo[];
   public impresora: Impresora = new Impresora();
   public errores: string[];
 
@@ -36,8 +39,8 @@ export class FormimpresorasComponent implements OnInit {
     private impresoraService: ImpresorasService,
     private notifyService: NotificationService,
     public router: Router,
-    public activatedroute: ActivatedRoute
-  ) {}
+    public activatedroute: ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
     this.cargardatosImpresora();
@@ -77,7 +80,7 @@ export class FormimpresorasComponent implements OnInit {
   //   });
 
   // }
-
+  loginForm!: FormGroup;
   cargardatosImpresora() {
     this.activatedroute.params.subscribe((params) => {
       let id = params['id'];
@@ -90,11 +93,19 @@ export class FormimpresorasComponent implements OnInit {
     this.impresoraService.getEstados().subscribe(estados => this.estados = estados);
     this.impresoraService.getMarcas2().subscribe(marcas => this.marcas = marcas);
     this.impresoraService.getAreas().subscribe(areas => this.areas = areas);
-
+    this.impresoraService.getModelos().subscribe(modelos => this.modelos = modelos);
     console.log(this.estados);
 
   }
 
+  compararModelo(o1: Modelo, o2: Modelo): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.id === o2.id;
+  }
+  com
   compararRegion(o1: Estado, o2: Estado): boolean {
     if (o1 === undefined && o2 === undefined) {
       return true;
