@@ -4,6 +4,7 @@ import com.sistema.apirest.Service.IAreaService;
 import com.sistema.apirest.Service.IEstadoService;
 import com.sistema.apirest.Service.IImpresoraService;
 import com.sistema.apirest.Service.IMarcaService;
+import com.sistema.apirest.Service.IModeloService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -25,6 +26,7 @@ import com.sistema.apirest.entity.Area;
 import com.sistema.apirest.entity.Estado_imprsora;
 import com.sistema.apirest.entity.Impresora;
 import com.sistema.apirest.entity.Marca;
+import com.sistema.apirest.entity.Modelo;
 
 import java.util.HashMap;
 import java.util.List;
@@ -47,6 +49,8 @@ public class ImpresoraController {
     private IMarcaService marcaService;
     @Autowired
     private IAreaService areaService;
+    @Autowired
+    private IModeloService modeloService;
 
     @GetMapping("/impresoras")
     public List<Impresora> listar(){
@@ -62,14 +66,14 @@ public class ImpresoraController {
         return marcaService.getMarcas();
     }
     @GetMapping("/impresoras/impresoras-modelos")
-    public List<Marca> listarModelos(){
-        return marcaService.getMarcas();
+    public List<Modelo> listarModelos(){
+        return modeloService.findAll();
     }
     @GetMapping("/impresoras/impresoras-areas")
     public List<Area> listarAreas(){
         return areaService.findAll();
     }
-
+	
     @Secured({"ROLE_ADMIN","ROLE_USER"})
     @GetMapping("/impresoras/{id}")
     public ResponseEntity<?> show(@PathVariable Long id){
