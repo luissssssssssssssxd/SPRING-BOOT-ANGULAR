@@ -47,6 +47,7 @@ import { FormmodeloComponent } from './modelos/formmodelo.component';
 import { IncidenciasComponent } from './incidencias/incidencias.component';
 import { FormincidenciasComponent } from './incidencias/formincidencias.component';
 import { ObsIncidenciasComponent } from './obs-incidencias/obs-incidencias.component';
+import { MatCardModule } from '@angular/material/card';
 
 const routes:Routes =[
   {path:'',redirectTo:'/impresoras',pathMatch:'full'},
@@ -57,7 +58,7 @@ const routes:Routes =[
   {path:'impresoras',component:ImpresorasComponent},
   {path:'modelos',component:ModelosComponent},
   {path:'incidencias',component:IncidenciasComponent},
-  {path:'obs_incidencias',component:ObsIncidenciasComponent},
+  {path:'obs_incidencias/:id',component:ObsIncidenciasComponent},
   {path:'estados/form/:id',component:FormestadoComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'estados/form',component:FormestadoComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'marcas/form',component:FormmarcaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
@@ -100,7 +101,8 @@ const routes:Routes =[
     ModelosComponent,
     FormmodeloComponent,
     IncidenciasComponent,
-    FormincidenciasComponent
+    FormincidenciasComponent,
+    ObsIncidenciasComponent
   ],
   imports: [
     BrowserModule,
@@ -131,7 +133,8 @@ const routes:Routes =[
       progressBar:true,
       progressAnimation:'decreasing'
     }),
-    Select2Module
+    Select2Module,
+    MatCardModule
 
   ],
   providers: [UrgenciasService,

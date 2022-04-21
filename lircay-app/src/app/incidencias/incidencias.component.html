@@ -63,7 +63,7 @@
     <ng-container matColumnDef="Observaciones">
         <th mat-header-cell *matHeaderCellDef >Observaciones</th>
         <td mat-cell *matCellDef="let incidencia" class="left-text">
-          <button class="btn" [routerLink]="['/obs_incidencias/form', incidencia.id]">
+          <button class="btn" [routerLink]="['/obs_incidencias/', incidencia.id]">
             <i class="fa-solid fa-eye"></i>
           </button>
         </td>
