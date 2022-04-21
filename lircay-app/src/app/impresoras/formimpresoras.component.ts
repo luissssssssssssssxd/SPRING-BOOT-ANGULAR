@@ -125,7 +125,7 @@ export class FormimpresorasComponent implements OnInit {
 
     return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.id === o2.id;
   }
-  compararModelo(o1: Modelos, o2: Modelos): boolean {
+  compararModelo(o1: Modelo, o2: Modelo): boolean {
     if (o1 === undefined && o2 === undefined) {
       return true;
     }
