@@ -47,6 +47,7 @@ import { FormmodeloComponent } from './modelos/formmodelo.component';
 import { IncidenciasComponent } from './incidencias/incidencias.component';
 import { FormincidenciasComponent } from './incidencias/formincidencias.component';
 import { MatCardModule } from '@angular/material/card';
+import { ObservacionComponent } from './observacion/observacion.component';
 
 const routes:Routes =[
   {path:'',redirectTo:'/impresoras',pathMatch:'full'},
@@ -57,6 +58,7 @@ const routes:Routes =[
   {path:'impresoras',component:ImpresorasComponent},
   {path:'modelos',component:ModelosComponent},
   {path:'incidencias',component:IncidenciasComponent},
+  {path:'incidencias/form/:id',component:ObservacionComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'estados/form/:id',component:FormestadoComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
   {path:'estados/form',component:FormestadoComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
   {path:'marcas/form',component:FormmarcaComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
@@ -99,7 +101,8 @@ const routes:Routes =[
     ModelosComponent,
     FormmodeloComponent,
     IncidenciasComponent,
-    FormincidenciasComponent
+    FormincidenciasComponent,
+    ObservacionComponent
   ],
   imports: [
     BrowserModule,

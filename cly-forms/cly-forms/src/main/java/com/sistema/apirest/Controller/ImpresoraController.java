@@ -1,10 +1,14 @@
 package com.sistema.apirest.Controller;
 
 import com.sistema.apirest.Service.IAreaService;
+import com.sistema.apirest.Service.ICentroCostoService;
 import com.sistema.apirest.Service.IEstadoService;
 import com.sistema.apirest.Service.IImpresoraService;
 import com.sistema.apirest.Service.IMarcaService;
 import com.sistema.apirest.Service.IModeloService;
+import com.sistema.apirest.Service.IPisoService;
+import com.sistema.apirest.Service.ISociedadaService;
+import com.sistema.apirest.Service.IUbicacionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -23,10 +27,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sistema.apirest.entity.Area;
+import com.sistema.apirest.entity.CentroCosto;
 import com.sistema.apirest.entity.Estado_imprsora;
 import com.sistema.apirest.entity.Impresora;
 import com.sistema.apirest.entity.Marca;
 import com.sistema.apirest.entity.Modelo;
+import com.sistema.apirest.entity.Piso;
+import com.sistema.apirest.entity.Sociedades;
+import com.sistema.apirest.entity.Ubicacion;
 
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +59,14 @@ public class ImpresoraController {
     private IAreaService areaService;
     @Autowired
     private IModeloService modeloService;
+	@Autowired
+	private IPisoService iPisoService;
+	@Autowired
+	private ISociedadaService iSociedadaService;
+	@Autowired
+	private ICentroCostoService centroCostoService;
+	@Autowired 
+	private IUbicacionService iUbicacionService;
 
     @GetMapping("/impresoras")
     public List<Impresora> listar(){
@@ -60,6 +76,22 @@ public class ImpresoraController {
     @GetMapping("/impresoras/impresoras-estados")
     public List<Estado_imprsora> listarEstados(){
         return estadoService.findAll();
+    }
+	@GetMapping("/impresoras/impresoras-pisos")
+    public List<Piso> listarpisos(){
+        return iPisoService.findAll();
+    }
+	@GetMapping("/impresoras/impresoras-sociedad")
+    public List<Sociedades> listarsociedad(){
+        return iSociedadaService.findAll();
+    }
+	@GetMapping("/impresoras/impresoras-centrocosto")
+    public List<CentroCosto> listarcentrocosto(){
+        return centroCostoService.findAll();
+    }
+	@GetMapping("/impresoras/impresoras-ubicacion")
+    public List<Ubicacion> listarubicacion(){
+        return iUbicacionService.findAll();
     }
     @GetMapping("/impresoras/impresoras-marcas")
     public List<Marca> listarMarcas(){

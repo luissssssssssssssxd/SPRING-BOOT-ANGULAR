@@ -1,0 +1,20 @@
+
+<table class="table table-bordered table-striped my-4" >
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>Fecha observacion</th>
+      <th>Observacion</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let obs of observacion">
+      <td>{{obs.id}}</td>
+      <td>{{obs.fecha_obs}}</td>
+      <td>{{obs.observacion}}</td>
+
+    </tr>
+  </tbody>
+</table>
+

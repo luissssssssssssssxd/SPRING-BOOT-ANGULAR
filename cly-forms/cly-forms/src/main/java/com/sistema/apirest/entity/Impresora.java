@@ -35,6 +35,21 @@ public class Impresora implements Serializable {
 
     private String observacion;
 
+    private String ip;
+
+    
+
+    public String getIp() {
+        return ip;
+    }
+
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+
+
     @PrePersist /* Metodo para insertar la fecha automaticamente */
     public void PrePersist() {
         fecha_mov = new Date();
@@ -57,7 +72,76 @@ public class Impresora implements Serializable {
     @ManyToOne
     @JoinColumn(name = "marca_id")
     private Marca marca;
+
+    @ManyToOne
+    @JoinColumn(name = "piso_id")
+    private Piso piso;
+
+    @ManyToOne
+    @JoinColumn(name = "sociedad_id")
+    private Sociedades sociedades;
+
+    @ManyToOne
+    @JoinColumn(name = "centro_id")
+    private CentroCosto centroCosto;
+
+    @ManyToOne
+    @JoinColumn(name = "ubicacion_id")
+    private Ubicacion ubicacion;
+
     
+
+    
+    public Date getFecha_mov() {
+        return fecha_mov;
+    }
+
+
+    public void setFecha_mov(Date fecha_mov) {
+        this.fecha_mov = fecha_mov;
+    }
+
+
+    public Piso getPiso() {
+        return piso;
+    }
+
+
+    public void setPiso(Piso piso) {
+        this.piso = piso;
+    }
+
+
+    public Sociedades getSociedades() {
+        return sociedades;
+    }
+
+
+    public void setSociedades(Sociedades sociedades) {
+        this.sociedades = sociedades;
+    }
+
+
+    public CentroCosto getCentroCosto() {
+        return centroCosto;
+    }
+
+
+    public void setCentroCosto(CentroCosto centroCosto) {
+        this.centroCosto = centroCosto;
+    }
+
+
+    public Ubicacion getUbicacion() {
+        return ubicacion;
+    }
+
+
+    public void setUbicacion(Ubicacion ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+
     public Marca getMarca() {
         return marca;
     }

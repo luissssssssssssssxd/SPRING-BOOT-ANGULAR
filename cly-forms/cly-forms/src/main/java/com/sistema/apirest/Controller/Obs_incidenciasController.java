@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.sistema.apirest.Repository.IObs_incidenciasDao;
 import com.sistema.apirest.Service.IImpresoraService;
 import com.sistema.apirest.Service.IIncidenciaService;
 import com.sistema.apirest.Service.IObs_incidenciasService;
@@ -42,6 +43,9 @@ public class Obs_incidenciasController {
     @Autowired
     private IIncidenciaService incidenciaService;
 
+	@Autowired
+	private IObs_incidenciasDao dao;
+
     @GetMapping("/obs_incidencias")
     public List<Obs_incidencias> listarObs_incidencias(){
         return obs_incidenciasService.findAll();
@@ -51,7 +55,7 @@ public class Obs_incidenciasController {
         return incidenciaService.findAll();
     }
 
-    // METODO GET OBS POR ID
+ /*    // METODO GET OBS POR ID
     @Secured({"ROLE_ADMIN","ROLE_USER"})
     @GetMapping("/obs_incidencias/{id}")
     public ResponseEntity<?> show(@PathVariable Long id){
@@ -76,7 +80,15 @@ public class Obs_incidenciasController {
             }
             
             return  new  ResponseEntity<>(obs_incidencias,HttpStatus.OK);
+    } */
+
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
+	@GetMapping("/obs_incidencias/{id}")
+    public List<Obs_incidencias> showCredential(@PathVariable Long id) {
+        return this.dao.listado(id);
     }
+
+	  
 
     // METODO POST OBS
     @Secured({"ROLE_ADMIN","ROLE_USER"})
