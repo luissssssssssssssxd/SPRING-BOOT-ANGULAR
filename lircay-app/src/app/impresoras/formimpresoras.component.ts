@@ -20,7 +20,7 @@ import { ImpresorasService } from './impresoras.service';
 export class FormimpresorasComponent implements OnInit {
   public exampleData: Select2Data;
 
-  numeroserie = new FormControl('', [Validators.required,Validators.minLength(2)]);
+  numeroserie = new FormControl('', [Validators.required, Validators.minLength(2)]);
   fecha_mov = new FormControl('', [Validators.required]);
   obs = new FormControl('', [Validators.required]);
   area = new FormControl('', [Validators.required]);
@@ -84,7 +84,6 @@ export class FormimpresorasComponent implements OnInit {
   //   });
 
   // }
-  loginForm!: FormGroup;
   cargardatosImpresora() {
     this.activatedroute.params.subscribe((params) => {
       let id = params['id'];
