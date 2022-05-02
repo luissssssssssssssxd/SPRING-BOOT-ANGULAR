@@ -79,11 +79,11 @@ public class Impresora implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "sociedad_id")
-    private Sociedades sociedades;
+    private Sociedades sociedad;
 
     @ManyToOne
     @JoinColumn(name = "centro_id")
-    private CentroCosto centroCosto;
+    private CentroCosto costo;
 
     @ManyToOne
     @JoinColumn(name = "ubicacion_id")
@@ -92,14 +92,6 @@ public class Impresora implements Serializable {
     
 
     
-    public Date getFecha_mov() {
-        return fecha_mov;
-    }
-
-
-    public void setFecha_mov(Date fecha_mov) {
-        this.fecha_mov = fecha_mov;
-    }
 
 
     public Piso getPiso() {
@@ -112,23 +104,26 @@ public class Impresora implements Serializable {
     }
 
 
-    public Sociedades getSociedades() {
-        return sociedades;
+  
+
+
+    public Sociedades getSociedad() {
+        return sociedad;
     }
 
 
-    public void setSociedades(Sociedades sociedades) {
-        this.sociedades = sociedades;
+    public void setSociedad(Sociedades sociedad) {
+        this.sociedad = sociedad;
     }
 
 
-    public CentroCosto getCentroCosto() {
-        return centroCosto;
+    public CentroCosto getCosto() {
+        return costo;
     }
 
 
-    public void setCentroCosto(CentroCosto centroCosto) {
-        this.centroCosto = centroCosto;
+    public void setCosto(CentroCosto costo) {
+        this.costo = costo;
     }
 
 

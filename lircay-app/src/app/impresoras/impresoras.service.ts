@@ -41,6 +41,22 @@ export class ImpresorasService {
     return this.http.get<any[]>(`${this.urlEndPoint}/${'impresoras-areas'}`);
   }
 
+  getPisos():Observable<any[]>{
+    return this.http.get<any[]>(`${this.urlEndPoint}/${'impresoras-pisos'}`);
+  }
+  getUbicaciones():Observable<any[]>{
+    return this.http.get<any[]>(`${this.urlEndPoint}/${'impresoras-ubicacion'}`);
+  }
+
+  getCentrocosto():Observable<any[]>{
+    return this.http.get<any[]>(`${this.urlEndPoint}/${'impresoras-centrocosto'}`);
+
+  }
+  getSociedades():Observable<any[]>{
+    return this.http.get<any[]>(`${this.urlEndPoint}/${'impresoras-sociedad'}`);
+
+  }
+
   //Registrar nuevo dato
   create(impresora:Impresora): Observable<any>{
     return this.http.post(this.urlEndPoint,impresora).pipe(
