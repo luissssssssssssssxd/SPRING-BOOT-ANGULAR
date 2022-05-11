@@ -222,17 +222,14 @@ public class ImpresoraController {
 		}
 		try {
 			datoactual.setMarca(impresora.getMarca());
-			marcaupd = impresoraService.save(datoactual);
 			datoactual.setEstado(impresora.getEstado());
-			estadoupd = impresoraService.save(datoactual);
 			datoactual.setModelo(impresora.getModelo());
-			modeloupd = impresoraService.save(datoactual);
 			datoactual.setNumeroserie(impresora.getNumeroserie());
-			numero_serieupd = impresoraService.save(datoactual);
 			datoactual.setObservacion(impresora.getObservacion());
-			obsupd = impresoraService.save(datoactual);
 			datoactual.setArea(impresora.getArea());
+			datoactual.setIp(impresora.getIp());
 			areaupd = impresoraService.save(datoactual);
+		
 			
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar el insert en la BD");

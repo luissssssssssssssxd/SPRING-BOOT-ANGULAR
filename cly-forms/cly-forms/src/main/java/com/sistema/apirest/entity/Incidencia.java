@@ -1,37 +1,37 @@
 package com.sistema.apirest.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.List;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "incidencias")
-public class Incidencia implements Serializable{
+public class Incidencia implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date fecha_inicio;
-
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date fecha_fin;
-
 
     @ManyToOne
     @JoinColumn(name = "impresora_id")
     private Impresora impresora;
-
 
     public Impresora getImpresora() {
         return this.impresora;
@@ -40,8 +40,6 @@ public class Incidencia implements Serializable{
     public void setImpresora(Impresora impresora) {
         this.impresora = impresora;
     }
-
-
 
     public long getId() {
         return this.id;
@@ -67,8 +65,4 @@ public class Incidencia implements Serializable{
         this.fecha_fin = fecha_fin;
     }
 
-
-
-    
-    
 }

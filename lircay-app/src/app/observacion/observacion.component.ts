@@ -41,4 +41,5 @@ export class ObservacionComponent implements OnInit {
     this.incidenciaservice.getIncidencias().subscribe(incidencias => this.incidencias = incidencias);
 
   }
+
 }

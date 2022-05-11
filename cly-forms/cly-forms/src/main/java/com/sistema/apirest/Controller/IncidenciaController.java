@@ -171,9 +171,7 @@ public class IncidenciaController {
 		}
 		try {
 			datoactual.setFecha_inicio(incidencia.getFecha_inicio());
-			fecha_inicioupd = incidenciaService.save(datoactual);
 			datoactual.setFecha_fin(incidencia.getFecha_fin());
-			fecha_finupd = incidenciaService.save(datoactual);
 			datoactual.setImpresora(incidencia.getImpresora());
 			impresoraudp = incidenciaService.save(datoactual);
 			

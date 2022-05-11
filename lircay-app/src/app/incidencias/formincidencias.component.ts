@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -16,13 +17,25 @@ export class FormincidenciasComponent implements OnInit {
   incidencia: Incidencia = new Incidencia();
   impresoras: Impresora[];
   public errores: string[];
+  minDate: Date;
+  maxDate: Date;
 
   constructor(
     private incidenciaService: IncidenciasService,
     private notifyService: NotificationService,
     public router: Router,
     public activatedroute: ActivatedRoute,
-  ) { }
+
+  ) {
+       // Set the minimum to January 1st 20 years in the past and December 31st a year in the future.
+       const currentYear = new Date().getFullYear();
+       this.minDate = new Date(currentYear - 20, 0, 1);
+       this.maxDate = new Date(currentYear + 1, 11, 31);
+  }
+  checkDate() {
+    const dateSendingToServer = new DatePipe('es-CL').transform(this.incidencia.fecha_inicio, 'dd/MM/yyyy')
+    console.log(dateSendingToServer);
+  }
 
   ngOnInit(): void {
     this.cargardatosIncidencias();
