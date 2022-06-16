@@ -15,6 +15,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,6 +38,8 @@ public class EstadoController {
     private IEstadoService estadoservice;
     
 
+
+	
     @GetMapping("/estados")
     public List<Estado_imprsora> listar(){
         return estadoservice.findAll();
@@ -72,7 +76,9 @@ public class EstadoController {
 		Estado_imprsora  estadonew = null;
 		Map<String, Object> response = new HashMap<>();
 		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+		String login = authentication.getPrincipal().toString();
 		if(bindingResult.hasErrors()) {
 //			List<String> errors = new ArrayList<>();
 //			
@@ -96,6 +102,7 @@ public class EstadoController {
 		}
 
 		try {
+		estado.setUsuariologeado(login);
 		estadonew =	 estadoservice.save(estado);
 			
 		} catch (DataAccessException e) {
@@ -119,7 +126,9 @@ public class EstadoController {
 		Estado_imprsora datoactual = estadoservice.findbyid(id);
 		Estado_imprsora estadoupd = null;
 		Map<String, Object> response = new HashMap<>();
-		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String login = authentication.getPrincipal().toString();
 		if(result.hasErrors()) {
 //			List<String> errors = new ArrayList<>();
 //			
@@ -149,6 +158,7 @@ public class EstadoController {
 			return  new  ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 		}
 		try {
+			datoactual.setUsuariologeado(login);
 			datoactual.setEstadoimpresora(estado.getEstadoimpresora());
 			estadoupd= estadoservice.save(datoactual);
 			

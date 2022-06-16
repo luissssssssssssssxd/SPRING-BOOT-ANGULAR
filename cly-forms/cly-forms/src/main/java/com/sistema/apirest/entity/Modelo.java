@@ -19,6 +19,16 @@ public class Modelo implements Serializable {
     private Long id;
 
     private String modelo;
+    private String usuariologeado;
+
+    
+    public String getUsuariologeado() {
+        return usuariologeado;
+    }
+
+    public void setUsuariologeado(String usuariologeado) {
+        this.usuariologeado = usuariologeado;
+    }
 
     public Long getId() {
         return id;

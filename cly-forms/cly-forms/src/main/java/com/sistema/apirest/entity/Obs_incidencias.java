@@ -31,6 +31,8 @@ public class Obs_incidencias implements Serializable  {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date fecha_obs;
 
+    private String usuariologeado;
+
     @ManyToOne
     @JoinColumn(name = "incidencia_id")
     private Incidencia incidencia;
@@ -39,6 +41,19 @@ public class Obs_incidencias implements Serializable  {
     public void PrePersist(){
         fecha_obs=new Date();
     }
+
+    
+
+    public String getUsuariologeado() {
+        return usuariologeado;
+    }
+
+
+
+    public void setUsuariologeado(String usuariologeado) {
+        this.usuariologeado = usuariologeado;
+    }
+
 
 
     public long getId() {

@@ -29,6 +29,17 @@ public class Incidencia implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date fecha_fin;
 
+    private String usuariologeado;
+    
+
+    public String getUsuariologeado() {
+        return usuariologeado;
+    }
+
+    public void setUsuariologeado(String usuariologeado) {
+        this.usuariologeado = usuariologeado;
+    }
+
     @ManyToOne
     @JoinColumn(name = "impresora_id")
     private Impresora impresora;

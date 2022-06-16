@@ -19,7 +19,17 @@ public class Marca implements Serializable {
 
     private String nombre;
 
+    private String usuariologeado;
 
+    
+
+    public String getUsuariologeado() {
+        return usuariologeado;
+    }
+
+    public void setUsuariologeado(String usuariologeado) {
+        this.usuariologeado = usuariologeado;
+    }
 
     public Long getId() {
         return id;

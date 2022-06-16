@@ -15,6 +15,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -74,7 +76,9 @@ public class ModeloController {
 		Modelo  modelonew = null;
 		Map<String, Object> response = new HashMap<>();
 		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+		String login = authentication.getPrincipal().toString();
 		if(bindingResult.hasErrors()) {
 //			List<String> errors = new ArrayList<>();
 //			
@@ -98,6 +102,7 @@ public class ModeloController {
 		}
 
 		try {
+		modelo.setUsuariologeado(login);
 		modelonew =	 modeloService.save(modelo);
 			
 		} catch (DataAccessException e) {
@@ -118,7 +123,9 @@ public class ModeloController {
     @Secured({"ROLE_ADMIN"})
 	@PutMapping("/modelos/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Modelo modelo,BindingResult result, @PathVariable Long id) {
-		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String login = authentication.getPrincipal().toString();
 		Modelo datoactual = modeloService.findbyid(id);
 		Modelo modeloupd = null;
 		Map<String, Object> response = new HashMap<>();
@@ -152,6 +159,7 @@ public class ModeloController {
 			return  new  ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 		}
 		try {
+			datoactual.setUsuariologeado(login);
 			datoactual.setModelo(modelo.getModelo());
 			modeloupd= modeloService.save(datoactual);
 			

@@ -133,6 +133,10 @@ public class AreaControlller {
 		Area datoactual = areaservice.findbyid(id);
 		Area areaupd = null;
 		Map<String, Object> response = new HashMap<>();
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String login = authentication.getPrincipal().toString();
 		
 		if(result.hasErrors()) {
 //			List<String> errors = new ArrayList<>();
@@ -164,6 +168,7 @@ public class AreaControlller {
 		}
 		try {
 			datoactual.setNombrearea(area.getNombrearea());
+			datoactual.setUsuariologeado(login);
 			areaupd= areaservice.save(datoactual);
 			
 		} catch (DataAccessException e) {

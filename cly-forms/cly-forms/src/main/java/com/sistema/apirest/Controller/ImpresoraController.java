@@ -15,6 +15,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -137,7 +139,9 @@ public class ImpresoraController {
 	public ResponseEntity<?> create(@Valid  @RequestBody Impresora id,BindingResult bindingResult) {
 		Impresora  impresoranew = null;
 		Map<String, Object> response = new HashMap<>();
-		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String login = authentication.getPrincipal().toString();
 
 		if(bindingResult.hasErrors()) {
 //			List<String> errors = new ArrayList<>();
@@ -162,6 +166,7 @@ public class ImpresoraController {
 		}
 
 		try {
+		id.setUsuariologeado(login);
 		impresoranew =	 impresoraService.save(id);
 			
 		} catch (DataAccessException e) {
@@ -180,7 +185,9 @@ public class ImpresoraController {
     @Secured({"ROLE_ADMIN"})
 	@PutMapping("/impresoras/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Impresora impresora,BindingResult result, @PathVariable Long id) {
-		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String login = authentication.getPrincipal().toString();
 		Impresora datoactual = impresoraService.findbyid(id);
 		Impresora marcaupd = null;
 		Impresora estadoupd = null;
@@ -228,6 +235,7 @@ public class ImpresoraController {
 			datoactual.setObservacion(impresora.getObservacion());
 			datoactual.setArea(impresora.getArea());
 			datoactual.setIp(impresora.getIp());
+			datoactual.setUsuariologeado(login);
 			areaupd = impresoraService.save(datoactual);
 		
 			

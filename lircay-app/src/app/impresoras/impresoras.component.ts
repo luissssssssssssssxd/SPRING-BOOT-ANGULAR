@@ -12,11 +12,20 @@ import { ImpresorasService } from './impresoras.service';
 @Component({
   selector: 'app-impresoras',
   templateUrl: './impresoras.component.html',
-  styleUrls: ['./impresoras.component.css']
+  styleUrls: ['./impresoras.component.css'],
 })
 export class ImpresorasComponent implements OnInit {
-
-  displayedColumns: string[] = ['action','Id','Numero de serie', 'Area', 'Estado', 'Marca', 'Modelo', 'Actualizacion', 'Observacion'];
+  displayedColumns: string[] = [
+    'action',
+    'Id',
+    'Numero de serie',
+    'Area',
+    'Estado',
+    'Marca',
+    'Modelo',
+    'Actualizacion',
+    'Observacion',
+  ];
 
   public dataSource: MatTableDataSource<Impresora>;
 
@@ -25,46 +34,48 @@ export class ImpresorasComponent implements OnInit {
 
   private dataArray: any;
 
-  impresoras:Impresora[];
+  impresoras: Impresora[];
   // impresoraElegida:Impresora = null;
-  filterpost = ''
-
+  filterpost = '';
 
   constructor(
-    public impresoraService:ImpresorasService,
+    public impresoraService: ImpresorasService,
     public authservice: AuthService,
-    private http:HttpClient,
-    private notifyService : NotificationService
-    ) { }
+    private http: HttpClient,
+    private notifyService: NotificationService
+  ) {}
 
-    applyFilter(event: Event) {
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.dataSource.filter = filterValue.trim().toLowerCase();
-    }
-
-   
-
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   ngOnInit(): void {
     this.cargardatos();
   }
 
-  cargardatos(){
-    Swal.fire({
-      title: 'Cargando datos',
-
-    });
-    Swal.showLoading();
-    this.impresoraService.getImpresoras().subscribe((impresoras) => {
-      (this.impresoras = impresoras),
-       console.log(this.impresoras);
-      this.dataArray = impresoras;
-      this.dataSource = new MatTableDataSource<Impresora>(this.dataArray);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      Swal.close();
-      console.log(impresoras);
-    });
+  cargardatos() {
+    if (!this.authservice.isAuthenticated()) {
+      Swal.fire({
+        title: 'Sesion caducada',
+        text: `Validar sesion `,
+        icon: 'info',
+      });
+    } else {
+      Swal.fire({
+        title: 'Cargando datos',
+      });
+      Swal.showLoading();
+      this.impresoraService.getImpresoras().subscribe((impresoras) => {
+        (this.impresoras = impresoras), console.log(this.impresoras);
+        this.dataArray = impresoras;
+        this.dataSource = new MatTableDataSource<Impresora>(this.dataArray);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        Swal.close();
+        console.log(impresoras);
+      });
+    }
   }
 
   delete(impresora: Impresora): void {
@@ -80,14 +91,14 @@ export class ImpresorasComponent implements OnInit {
         this.impresoraService.delete(impresora.id).subscribe((response) => {
           this.impresoras = this.impresoras.filter((cli) => cli !== impresora);
           this.cargardatos();
-          this.notifyService.showWarning(`Impresora: ${impresora.numeroserie}  eliminada`,"Delete");
+          this.notifyService.showWarning(
+            `Impresora: ${impresora.numeroserie}  eliminada`,
+            'Delete'
+          );
         });
-
-      }
-       else if (result.dismiss === Swal.DismissReason.cancel) {
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire('Cancelado', 'Dato no eliminado :)', 'error');
       }
     });
   }
-
 }

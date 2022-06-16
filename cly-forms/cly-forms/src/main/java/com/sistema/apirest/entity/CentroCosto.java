@@ -17,6 +17,8 @@ public class CentroCosto  implements Serializable{
 
     private String nombre;
 
+    private String usuariologeado;
+
     public Long getId() {
         return id;
     }
@@ -31,6 +33,14 @@ public class CentroCosto  implements Serializable{
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getUsuariologeado() {
+        return usuariologeado;
+    }
+
+    public void setUsuariologeado(String usuariologeado) {
+        this.usuariologeado = usuariologeado;
     }
 
     

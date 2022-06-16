@@ -17,6 +17,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -86,7 +88,9 @@ public class IncidenciaController {
 	public ResponseEntity<?> create(@Valid  @RequestBody Incidencia id,BindingResult bindingResult) {
 		Incidencia  incidencianew = null;
 		Map<String, Object> response = new HashMap<>();
-		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String login = authentication.getPrincipal().toString();
 
 		if(bindingResult.hasErrors()) {
 //			List<String> errors = new ArrayList<>();
@@ -111,6 +115,7 @@ public class IncidenciaController {
 		}
 
 		try {
+		id.setUsuariologeado(login);
 		incidencianew =	 incidenciaService.save(id);
 			
 		} catch (DataAccessException e) {
@@ -133,7 +138,9 @@ public class IncidenciaController {
     @Secured({"ROLE_ADMIN"})
 	@PutMapping("/incidencias/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Incidencia incidencia,BindingResult result, @PathVariable Long id) {
-		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String login = authentication.getPrincipal().toString();
 		Incidencia datoactual = incidenciaService.findByid(id);
 		Incidencia fecha_inicioupd = null;
 		Incidencia fecha_finupd = null;
@@ -173,6 +180,7 @@ public class IncidenciaController {
 			datoactual.setFecha_inicio(incidencia.getFecha_inicio());
 			datoactual.setFecha_fin(incidencia.getFecha_fin());
 			datoactual.setImpresora(incidencia.getImpresora());
+			datoactual.setUsuariologeado(login);
 			impresoraudp = incidenciaService.save(datoactual);
 			
 		} catch (DataAccessException e) {

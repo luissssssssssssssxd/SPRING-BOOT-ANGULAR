@@ -16,6 +16,7 @@ public class Estado_imprsora implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String estadoimpresora;
+    private String usuariologeado;
 
     
     public Long getId() {
@@ -30,6 +31,13 @@ public class Estado_imprsora implements Serializable {
     public void setEstadoimpresora(String estadoimpresora) {
         this.estadoimpresora = estadoimpresora;
     }
+    public String getUsuariologeado() {
+        return usuariologeado;
+    }
+    public void setUsuariologeado(String usuariologeado) {
+        this.usuariologeado = usuariologeado;
+    }
+    
 
     
     

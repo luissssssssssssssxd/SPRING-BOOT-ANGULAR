@@ -18,6 +18,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -53,32 +55,6 @@ public class Obs_incidenciasController {
         return incidenciaService.findAll();
     }
 
- /*    // METODO GET OBS POR ID
-    @Secured({"ROLE_ADMIN","ROLE_USER"})
-    @GetMapping("/obs_incidencias/{id}")
-    public ResponseEntity<?> show(@PathVariable Long id){
-        Obs_incidencias obs_incidencias = null;
-        Map<String, Object> response = new HashMap<>();
-
-
-        try {
-            obs_incidencias = obs_incidenciasService.findByid(id);
-    
-            } catch (DataAccessException e) {
-                response.put("mensaje", "Error al realizar la consulta en la BD");
-                response.put("mensaje", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-                return  new  ResponseEntity<Map<String,Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-            
-            
-    //		Si registro buscado en NULO
-            if(obs_incidencias == null) {
-                response.put("mensaje", "La impresora con el ID:  ".concat(id.toString().concat(" No existe en la BD")));
-                return  new  ResponseEntity<>(response,HttpStatus.NOT_FOUND);
-            }
-            
-            return  new  ResponseEntity<>(obs_incidencias,HttpStatus.OK);
-    } */
 
 	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/obs_incidencias/{id}")
@@ -95,7 +71,9 @@ public class Obs_incidenciasController {
 		Obs_incidencias  obs_incidenciasnew = null;
 		Map<String, Object> response = new HashMap<>();
 		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+		String login = authentication.getPrincipal().toString();
 		if(bindingResult.hasErrors()) {
 
 			
@@ -115,6 +93,7 @@ public class Obs_incidenciasController {
 		}
 
 		try {
+			id.setUsuariologeado(login);
             obs_incidenciasnew =	 obs_incidenciasService.save(id);
 			
 		} catch (DataAccessException e) {
@@ -134,7 +113,9 @@ public class Obs_incidenciasController {
     @Secured({"ROLE_ADMIN"})
 	@PutMapping("/obs_incidencias/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Obs_incidencias obs_incidencias,BindingResult result, @PathVariable Long id) {
-		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String login = authentication.getPrincipal().toString();
 		Obs_incidencias datoactual = obs_incidenciasService.findByid(id);
 		Obs_incidencias obsupd = null;
         
@@ -171,6 +152,7 @@ public class Obs_incidenciasController {
 			return  new  ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 		}
 		try {
+			datoactual.setUsuariologeado(login);
 			datoactual.setObservacion(obs_incidencias.getObservacion());
 			obsupd = obs_incidenciasService.save(datoactual);
 			

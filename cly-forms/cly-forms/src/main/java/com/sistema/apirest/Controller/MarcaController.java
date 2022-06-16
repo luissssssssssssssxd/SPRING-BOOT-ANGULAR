@@ -15,6 +15,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -69,7 +71,9 @@ public class MarcaController {
 	public ResponseEntity<?> create(@Valid  @RequestBody Marca marca,BindingResult bindingResult) {
 		Marca  marcanew = null;
 		Map<String, Object> response = new HashMap<>();
-		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String login = authentication.getPrincipal().toString();
 
 		if(bindingResult.hasErrors()) {
 //			List<String> errors = new ArrayList<>();
@@ -94,6 +98,7 @@ public class MarcaController {
 		}
 
 		try {
+		marca.setUsuariologeado(login);
 		marcanew =	 marcaService.save(marca);
 			
 		} catch (DataAccessException e) {
@@ -113,7 +118,9 @@ public class MarcaController {
     @Secured({"ROLE_ADMIN"})
 	@PutMapping("/marcas/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Marca marca,BindingResult result, @PathVariable Long id) {
-		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String login = authentication.getPrincipal().toString();
 		Marca datoactual = marcaService.findbyid(id);
 		Marca marcaupd = null;
 		Map<String, Object> response = new HashMap<>();
@@ -147,6 +154,7 @@ public class MarcaController {
 			return  new  ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 		}
 		try {
+			datoactual.setUsuariologeado(login);
 			datoactual.setNombre(marca.getNombre());
 			marcaupd= marcaService.save(datoactual);
 			

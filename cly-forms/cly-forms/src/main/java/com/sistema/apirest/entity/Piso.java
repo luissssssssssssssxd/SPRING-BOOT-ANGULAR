@@ -15,6 +15,7 @@ public class Piso implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+    private String usuariologeado;
     public Long getId() {
         return id;
     }
@@ -27,6 +28,13 @@ public class Piso implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    public String getUsuariologeado() {
+        return usuariologeado;
+    }
+    public void setUsuariologeado(String usuariologeado) {
+        this.usuariologeado = usuariologeado;
+    }
+    
 
     
     

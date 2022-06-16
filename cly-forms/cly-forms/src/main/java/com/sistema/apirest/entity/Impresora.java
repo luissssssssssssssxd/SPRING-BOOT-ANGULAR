@@ -37,7 +37,19 @@ public class Impresora implements Serializable {
 
     private String ip;
 
+    private String usuariologeado;
+
     
+
+    public String getUsuariologeado() {
+        return usuariologeado;
+    }
+
+
+    public void setUsuariologeado(String usuariologeado) {
+        this.usuariologeado = usuariologeado;
+    }
+
 
     public String getIp() {
         return ip;
