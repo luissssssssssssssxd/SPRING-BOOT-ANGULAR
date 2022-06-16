@@ -8,10 +8,8 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import com.sistema.apirest.Repository.IObs_incidenciasDao;
-import com.sistema.apirest.Service.IImpresoraService;
 import com.sistema.apirest.Service.IIncidenciaService;
 import com.sistema.apirest.Service.IObs_incidenciasService;
-import com.sistema.apirest.entity.Impresora;
 import com.sistema.apirest.entity.Incidencia;
 import com.sistema.apirest.entity.Obs_incidencias;
 
@@ -99,11 +97,7 @@ public class Obs_incidenciasController {
 		
 
 		if(bindingResult.hasErrors()) {
-//			List<String> errors = new ArrayList<>();
-//			
-//			for(FieldError err: bindingResult.getFieldErrors()) {
-//				errors.add("El campo"+ err.getField() +  " '"+ err.getDefaultMessage());
-//			}
+
 			
 			List<String> errors = bindingResult.getFieldErrors()
 					.stream()

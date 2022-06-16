@@ -7,14 +7,19 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.sistema.apirest.Repository.IUsuarioDao;
 import com.sistema.apirest.Service.IAreaService;
 import com.sistema.apirest.entity.Area;
+import com.sistema.apirest.entity.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,6 +38,8 @@ public class AreaControlller {
 
     @Autowired
     private IAreaService areaservice;
+	@Autowired
+	private IUsuarioDao usuariodao;
 
 	@GetMapping("/areas")
     public List<Area> listar() {
@@ -73,15 +80,18 @@ public class AreaControlller {
 	public ResponseEntity<?> create(@Valid  @RequestBody Area area,BindingResult bindingResult) {
 		Area  areanew = null;
 		Map<String, Object> response = new HashMap<>();
-		
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String login = authentication.getPrincipal().toString();
+
+		Usuario  usuario =  usuariodao.findByUsername(login);
+
+		System.out.println("el usuario logeado es \n"+ login);
+		System.out.println("este deberia ser el usuario buscado \n"+usuario);
 
 		if(bindingResult.hasErrors()) {
-//			List<String> errors = new ArrayList<>();
-//			
-//			for(FieldError err: bindingResult.getFieldErrors()) {
-//				errors.add("El campo"+ err.getField() +  " '"+ err.getDefaultMessage());
-//			}
-			
+
 			List<String> errors = bindingResult.getFieldErrors()
 					.stream()
 					.map(err -> {
@@ -98,8 +108,10 @@ public class AreaControlller {
 		}
 
 		try {
+		area.setUsuariologeado(login);
+	
 		areanew =	 areaservice.save(area);
-			
+		System.out.println(areanew);	
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar el insert en la BD");
 			response.put("mensaje", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));

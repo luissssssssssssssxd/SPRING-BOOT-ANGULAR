@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 import { Area } from './area';
 
 @Injectable({
@@ -27,13 +28,16 @@ export class AreaService {
       catchError(e => {
 
         if(e.status ==400){
+          Swal.fire('Error',`Error BD ${e.status}  `,'error');
           return throwError(e);
         }
         if(e.error.mensaje){
           console.error(e.error.mensaje);
-        }
+          Swal.fire('Error',`Error BD ${e.error.mensaje}  `,'error');
 
+        }
         console.error(e.error.mensaje);
+        Swal.fire('Error',`Error BD ${e.error.mensaje}  `,'error');
         return throwError(e);
       })
     );
@@ -77,6 +81,8 @@ export class AreaService {
 
         if(e.error.mensaje){
           console.error(e.error.mensaje);
+          Swal.fire('Error',`Error BD ${e.error.mensaje}  `,'error');
+
         }
         return throwError(e);
       })

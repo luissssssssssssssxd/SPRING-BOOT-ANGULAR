@@ -16,26 +16,22 @@ public class IPisoImpl implements IPisoService {
 
     @Override
     public List<Piso> findAll() {
-        // TODO Auto-generated method stub
         return dao.findAll();
     }
 
     @Override
     public Piso save(Piso piso) {
-        // TODO Auto-generated method stub
         return dao.save(piso);
     }
 
     @Override
     public void delete(Long id) {
-        // TODO Auto-generated method stub
         dao.deleteById(id);
         
     }
 
     @Override
     public Piso findbyid(Long id) {
-        // TODO Auto-generated method stub
         return dao.findById(id).orElse(null);
     }
     

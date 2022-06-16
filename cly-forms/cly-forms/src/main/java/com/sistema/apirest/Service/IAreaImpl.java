@@ -4,8 +4,11 @@ import java.util.List;
 
 import com.sistema.apirest.Repository.iAreaDao;
 import com.sistema.apirest.entity.Area;
+import com.sistema.apirest.entity.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 @Service
 public class IAreaImpl implements IAreaService {

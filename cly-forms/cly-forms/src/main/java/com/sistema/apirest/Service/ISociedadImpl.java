@@ -16,13 +16,11 @@ public class ISociedadImpl implements ISociedadaService {
 
     @Override
     public List<Sociedades> findAll() {
-        // TODO Auto-generated method stub
         return iSociedadDao.findAll();
     }
 
     @Override
     public Sociedades save(Sociedades sociedades) {
-        // TODO Auto-generated method stub
         return iSociedadDao.save(sociedades);
     }
 
@@ -34,7 +32,6 @@ public class ISociedadImpl implements ISociedadaService {
 
     @Override
     public Sociedades findbyid(Long id) {
-        // TODO Auto-generated method stub
         return iSociedadDao.findById(id).orElse(null);
     }
     
