@@ -29,6 +29,21 @@ public class Incidencia implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date fecha_fin;
 
+
+
+    private String impresorareemplazo;
+
+
+
+
+    public String getImpresorareemplazo() {
+        return impresorareemplazo;
+    }
+
+    public void setImpresorareemplazo(String impresorareemplazo) {
+        this.impresorareemplazo = impresorareemplazo;
+    }
+
     private String usuariologeado;
     
 

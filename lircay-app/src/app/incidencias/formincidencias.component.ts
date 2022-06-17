@@ -68,6 +68,13 @@ export class FormincidenciasComponent implements OnInit {
 
     return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.id === o2.id;
   }
+  compararRegion2(o1: Impresora, o2: Impresora): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.id === o2.id;
+  }
 
   public create(): void {
     this.incidenciaService.create(this.incidencia).subscribe(

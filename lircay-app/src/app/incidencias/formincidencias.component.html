@@ -24,10 +24,18 @@
         </mat-form-field>
         <mat-form-field  class="example-full-width" appearance="standard">
           <mat-label>Fecha fin</mat-label>
-          <input matInput [matDatepicker]="dp4" [(ngModel)]="incidencia.fecha_fin" name="fecha_fin" disabled>
+          <input matInput [matDatepicker]="dp4" [(ngModel)]="incidencia.fecha_fin" name="fecha_fin"  *ngIf="!incidencia.fecha_inicio else elseBlock"
+          [disabled]="!formIncidencias.form.valid">
           <mat-hint>DD/MM/YYYY</mat-hint>
           <mat-datepicker-toggle matSuffix [for]="dp4"></mat-datepicker-toggle>
           <mat-datepicker #dp4 disabled="false"></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="standard">
+          <mat-label>Impresora de reemplazo</mat-label>
+          <mat-select  [compareWith]="compararRegion2" [(ngModel)]="incidencia.impresorareemplazo" name="impresorareemplazo">
+            <mat-option [value]="undefined" >Elige Impresora</mat-option>
+            <mat-option *ngFor="let impresora of impresoras" [value]="impresora.numeroserie">{{impresora.numeroserie}}</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
 

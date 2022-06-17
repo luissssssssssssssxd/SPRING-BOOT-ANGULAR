@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.sistema.apirest.Repository.IImpresoraDao;
 import com.sistema.apirest.Service.IImpresoraService;
 import com.sistema.apirest.Service.IIncidenciaService;
 import com.sistema.apirest.entity.Impresora;
@@ -43,6 +44,9 @@ public class IncidenciaController {
     @Autowired
     private IImpresoraService impresoraService;
 
+	@Autowired
+	private IImpresoraDao dao;
+
     @GetMapping("/incidencias")
     public List<Incidencia> listarIncidencias(){
         return incidenciaService.findAll();
@@ -50,7 +54,8 @@ public class IncidenciaController {
 
     @GetMapping("/incidencias/incidencias-impresoras")
     public List<Impresora> listarImpresoras(){
-        return impresoraService.findAll();
+		return dao.impresorasactivas();
+        /* return impresoraService.findAll(); */
     }
 
 
@@ -117,6 +122,7 @@ public class IncidenciaController {
 		try {
 		id.setUsuariologeado(login);
 		incidencianew =	 incidenciaService.save(id);
+		
 			
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar el insert en la BD");
