@@ -22,7 +22,10 @@ public interface IImpresoraDao extends JpaRepository<Impresora,Long> {
 
     @Transactional
     @Modifying
-    @Query("UPDATE Impresora i INNER JOIN Incidencias in ON i.id= in.impresora_id  INNER JOIN Estado_imprsora est ON i.estado_id = est.id  SET i.estado_id=?2  WHERE in.id=?1")
-    void updatestatusprinter(Long id, Long status);
-    
+    @Query("UPDATE Impresora p SET p.estado.id= ?2 WHERE p.numeroserie = ?1")
+    void updatePrinter(String id, Long estado);
+
+
+    @Transactional
+    public Impresora findBynumeroserie(String numeroserie);
 }

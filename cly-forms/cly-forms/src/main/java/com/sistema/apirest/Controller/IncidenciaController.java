@@ -39,6 +39,8 @@ public class IncidenciaController {
 
     @Autowired
     private IIncidenciaService incidenciaService;
+
+
     
 
     @Autowired
@@ -120,7 +122,12 @@ public class IncidenciaController {
 		}
 
 		try {
+		String printer = id.getImpresora().getNumeroserie();
+		Long estado = (long) 2;
+		System.out.println("LA IMPRESORA REGISTRADA EN LA INCIDENCIA ES  "+id.getImpresora().getNumeroserie());
+
 		id.setUsuariologeado(login);
+		dao.updatePrinter(printer, estado);
 		incidencianew =	 incidenciaService.save(id);
 		
 			
