@@ -80,12 +80,6 @@ public class EstadoController {
 
 		String login = authentication.getPrincipal().toString();
 		if(bindingResult.hasErrors()) {
-//			List<String> errors = new ArrayList<>();
-//			
-//			for(FieldError err: bindingResult.getFieldErrors()) {
-//				errors.add("El campo"+ err.getField() +  " '"+ err.getDefaultMessage());
-//			}
-			
 			List<String> errors = bindingResult.getFieldErrors()
 					.stream()
 					.map(err -> {
@@ -111,7 +105,7 @@ public class EstadoController {
 			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 			
 		}
-		response.put("mensaje", "El area ha sido creado con exito");
+		response.put("mensaje", "El estado ha sido creado con exito");
 		response.put("estado", estadonew);
 			
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
