@@ -13,6 +13,8 @@ import com.sistema.apirest.Service.IIncidenciaService;
 import com.sistema.apirest.entity.Impresora;
 import com.sistema.apirest.entity.Incidencia;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -41,7 +43,8 @@ public class IncidenciaController {
     private IIncidenciaService incidenciaService;
 
 
-    
+
+
 
     @Autowired
     private IImpresoraService impresoraService;
@@ -123,6 +126,10 @@ public class IncidenciaController {
 
 		try {
 		String printer = id.getImpresora().getNumeroserie();
+		if(id.getImpresora().getEstado().getId() == 2 ){
+			System.out.println("Impresora inactiva");
+
+		}
 		Long estado = (long) 2;
 		System.out.println("LA IMPRESORA REGISTRADA EN LA INCIDENCIA ES  "+id.getImpresora().getNumeroserie());
 

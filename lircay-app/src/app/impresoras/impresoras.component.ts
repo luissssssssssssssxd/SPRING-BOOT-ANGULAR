@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { NotificationService } from '../notification.service';
 import { AuthService } from '../usuarios/auth.service';
@@ -42,7 +43,8 @@ export class ImpresorasComponent implements OnInit {
     public impresoraService: ImpresorasService,
     public authservice: AuthService,
     private http: HttpClient,
-    private notifyService: NotificationService
+    private notifyService: NotificationService,
+    private router:Router
   ) {}
 
   applyFilter(event: Event) {
@@ -61,6 +63,8 @@ export class ImpresorasComponent implements OnInit {
         text: `Validar sesion `,
         icon: 'info',
       });
+      this.router.navigate(['/login']);
+      console.log("error con sesion");
     } else {
       Swal.fire({
         title: 'Cargando datos',
